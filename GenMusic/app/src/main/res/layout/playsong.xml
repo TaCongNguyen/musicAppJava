@@ -45,7 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/background_playbar">
+        android:background="@drawable/ic_background">
+">
 
         <RelativeLayout
             android:id="@+id/rlSeekBarLayout"
@@ -162,7 +163,7 @@
         android:layout_above="@+id/rlMainPlayMusic"
         android:layout_centerVertical="true"
         android:layout_marginBottom="-1dp"
-        android:background="@drawable/background">
+        android:background="@drawable/ic_background">
 
         <RelativeLayout
             android:id="@+id/rlTool"
@@ -214,6 +215,20 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/ic_cd_center" />
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="91dp"
+            android:layout_height="31dp"
+            android:layout_below="@+id/rlTool"
+            android:layout_alignStart="@+id/rlTool"
+            android:layout_alignEnd="@+id/rlTool"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="88dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginBottom="203dp"
+            android:text="SongName" />
     </RelativeLayout>
 </RelativeLayout>
 
