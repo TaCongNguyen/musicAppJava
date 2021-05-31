@@ -60,15 +60,5 @@
         app:tint="@color/FlatWhite"
         android:padding="22dp"
         android:background="@drawable/ripple_effect"/>
-    <ImageView
-        android:id="@+id/quick_play_pause"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="@id/image"
-        app:layout_constraintEnd_toEndOf="@id/image"
-        app:layout_constraintTop_toTopOf="@id/image"
-        app:layout_constraintBottom_toBottomOf="@id/image"
-        android:elevation="1dp"
-        android:alpha="0.55"
-        app:tint="#394545" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
