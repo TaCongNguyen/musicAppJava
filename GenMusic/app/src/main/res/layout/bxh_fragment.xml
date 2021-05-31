@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/main_content_linear"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/playlist_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/chart_piece_layout"/>
+
+    <include
+        android:id="@+id/song_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/song_piece_layout" />
+
+</LinearLayout>

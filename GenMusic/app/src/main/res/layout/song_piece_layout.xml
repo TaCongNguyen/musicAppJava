@@ -37,8 +37,8 @@
         android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layoutManager="LinearLayoutManager"
-        tools:layout_editor_absoluteY="-4dp"
         tools:listitem="@layout/item_feature_song"
         tools:orientation="vertical" />
     <TextView

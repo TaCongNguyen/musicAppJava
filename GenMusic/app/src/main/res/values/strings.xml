@@ -1,5 +1,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Âm nhạc</string>
+    <string name="app_name">Gen Music</string>
+    <string name="menu_trang_chu">Trang chủ</string>
+    <string name="menu_the_loai">Thể loại</string>
+    <string name="menu_xep_hang">Xếp hạng</string>
+    <string name="menu_ca_nhan">Cá nhân</string>
+
     <string name="queue">Hàng đợi</string>
     <string name="library">Thư viện</string>
     <string name="hello_blank_fragment">Xin chào Fragment trống</string>
@@ -270,5 +275,4 @@
     <string name="back_description">Trở về trang trước</string>
     <string name="left_right_audio_balance">Cân bằng âm trái phải</string>
     <string name="play_preview_all">Nghe thử (tất cả)</string>
-
 </resources>
