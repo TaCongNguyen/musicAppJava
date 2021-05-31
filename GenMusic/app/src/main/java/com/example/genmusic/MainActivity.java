@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -43,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         //NAVIGATION BAR------------------------
-
         //Xử lý ViewPager
         setOnViewPager();
 
         //Xử lý BottomNavigationBar
         setOnNavBar();
 
-
+        //Xử lý quay về đúng TheLoaiFragment
+        troVeTheLoaiFragment();
 
     }
 
@@ -121,5 +122,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void troVeTheLoaiFragment() {
+        Intent intent = getIntent();
+        int index = intent.getIntExtra("the_loai", 0);
+        if(index == 1)
+            viewPager.setCurrentItem(index);
+
+    }
 
 }

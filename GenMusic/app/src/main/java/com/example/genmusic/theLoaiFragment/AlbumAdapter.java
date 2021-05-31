@@ -57,10 +57,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, AlbumPlaylist.class);
 
-                    intent.putExtra("key", "album qua roi ne !");
-
+                    Intent intent = new Intent(context, Playlist.class);
                     context.startActivity(intent);
                 }
 

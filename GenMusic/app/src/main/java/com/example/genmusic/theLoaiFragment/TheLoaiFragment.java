@@ -59,7 +59,6 @@ public class TheLoaiFragment extends Fragment {
         albumAdapter.setData(getListAlbum());
         rcvAlbum.setAdapter(albumAdapter);
 
-
         //Thể loại (tương tự album)
         theLoaiAdapter = new TheLoaiAdapter();
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(requireContext(), 2);

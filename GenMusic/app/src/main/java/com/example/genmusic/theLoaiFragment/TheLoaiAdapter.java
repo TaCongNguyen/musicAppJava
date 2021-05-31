@@ -1,5 +1,7 @@
 package com.example.genmusic.theLoaiFragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import java.util.List;
 
 public class TheLoaiAdapter extends RecyclerView.Adapter<TheLoaiAdapter.TheLoaiViewHolder>{
 
+    //Lưu context
+    private Context context;
     //Tạo list chứa các thể loại
     private List<TheLoai> ListTheLoai;
 
@@ -31,6 +35,8 @@ public class TheLoaiAdapter extends RecyclerView.Adapter<TheLoaiAdapter.TheLoaiV
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_the_loai, parent, false);
 
+        //Lưu context
+        context = parent.getContext();
         return new TheLoaiViewHolder(view);
     }
 
@@ -44,6 +50,16 @@ public class TheLoaiAdapter extends RecyclerView.Adapter<TheLoaiAdapter.TheLoaiV
         {
             holder.imgTheLoai.setImageResource(theLoai.getImgId());
             holder.txtTieuDeTheLoai.setText(theLoai.getTieuDe());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(context, Playlist.class);
+                    context.startActivity(intent);
+
+                }
+            });
         }
 
     }
