@@ -3,35 +3,26 @@ package com.example.genmusic;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
-import com.example.genmusic.trangChuFragment.SongImage;
-import com.example.genmusic.trangChuFragment.SongImageAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import me.relex.circleindicator.CircleIndicator;
 
 public class MainActivity extends AppCompatActivity {
 
     //-----------------------A. Khai báo biến -------------------------
     private BottomNavigationView bottomNavigationView;
-
     private ViewPager viewPager;
 
+    private ImageButton btnUser, btnSetting;
+    private EditText edtSearch;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         //-----------------------b. Ánh xạ view -------------------------
         bottomNavigationView = findViewById(R.id.BottomNav);
         viewPager = findViewById(R.id.ViewPager);
+
+        btnUser = findViewById(R.id.btnUser);
+        btnSetting = findViewById(R.id.btnSetting);
+        edtSearch = findViewById(R.id.edtSearch);
 
         //-----------------------C. Code xử lý -------------------------
 
@@ -53,11 +48,17 @@ public class MainActivity extends AppCompatActivity {
         setOnNavBar();
 
         //Xử lý quay về đúng TheLoaiFragment
-        troVeTheLoaiFragment();
+        backToTheLoaiFragment();
 
         //Xử lý quay về đúng CaNhanFragment
-        troVeCaNhanFragment();
+        backToCaNhanFragment();
 
+        //Đi đến Search Activity
+        goToSearchActivity();
+        //Đi đến User Setting Activity
+        goToUserActivity();
+        //Đi đến Setting Activity
+        goToSettingActivity();
     }
     // CÁC HÀM XỬ LÝ -----------------------------------------------------
 
@@ -123,20 +124,51 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void troVeTheLoaiFragment() {
-        Intent intent = getIntent();
+    private void backToTheLoaiFragment() {
+        intent = getIntent();
         int index = intent.getIntExtra("the_loai", 0);
         if(index == 1)
             viewPager.setCurrentItem(index);
 
     }
 
-    private void troVeCaNhanFragment() {
-        Intent intent = getIntent();
+    private void backToCaNhanFragment() {
+        intent = getIntent();
         int index = intent.getIntExtra("ca_nhan", 0);
         if(index == 3)
             viewPager.setCurrentItem(index);
     }
 
+    private void goToSearchActivity() {
+        edtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, Search.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void goToUserActivity() {
+        btnUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, UserSetting.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+    private void goToSettingActivity() {
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, Setting.class);
+                startActivity(intent);
+            }
+        });
+
+    }
 
 }
