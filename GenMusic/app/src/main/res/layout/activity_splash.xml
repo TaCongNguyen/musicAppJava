@@ -28,7 +28,7 @@
         android:fontFamily="@font/bangers"
         android:text="GenMusic"
         android:textAlignment="center"
-        android:textColor="#F57C00"
+        android:textColor="#58EDD7"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
