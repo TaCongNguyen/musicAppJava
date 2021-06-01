@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         //Xử lý quay về đúng TheLoaiFragment
         backToTheLoaiFragment();
 
-        //Xử lý quay về đúng CaNhanFragment
-        backToCaNhanFragment();
+
 
         //Đi đến Search Activity
         goToSearchActivity();
@@ -60,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         //Đi đến Setting Activity
         goToSettingActivity();
     }
+
+
     // CÁC HÀM XỬ LÝ -----------------------------------------------------
 
 
@@ -124,19 +125,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void backToTheLoaiFragment() {
         intent = getIntent();
-        int index = intent.getIntExtra("the_loai", 0);
-        if(index == 1)
-            viewPager.setCurrentItem(index);
+        int index = intent.getIntExtra("current_fragment", 0);
+        viewPager.setCurrentItem(index);
 
-    }
-
-    private void backToCaNhanFragment() {
-        intent = getIntent();
-        int index = intent.getIntExtra("ca_nhan", 0);
-        if(index == 3)
-            viewPager.setCurrentItem(index);
     }
 
     private void goToSearchActivity() {
@@ -144,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, Search.class);
+
+                intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
             }
         });
@@ -155,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, UserSetting.class);
+                intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
             }
         });
@@ -165,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, Setting.class);
+                intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
             }
         });

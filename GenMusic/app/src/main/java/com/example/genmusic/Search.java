@@ -27,7 +27,11 @@ public class Search extends AppCompatActivity {
         btnSearchBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent MainIntent = getIntent();
+                int index = MainIntent.getIntExtra("current_fragment",0);
+
                 Intent intent = new Intent(Search.this, MainActivity.class);
+                intent.putExtra("current_fragment",index);
                 startActivity(intent);
             }
         });

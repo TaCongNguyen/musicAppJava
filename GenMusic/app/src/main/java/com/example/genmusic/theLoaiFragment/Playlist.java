@@ -49,7 +49,7 @@ public class Playlist extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Playlist.this, MainActivity.class);
-                intent.putExtra("the_loai",1);
+                intent.putExtra("current_fragment",1);
                 startActivity(intent);
             }
         });

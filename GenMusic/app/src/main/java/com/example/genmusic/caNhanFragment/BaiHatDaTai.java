@@ -80,7 +80,7 @@ public class BaiHatDaTai extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BaiHatDaTai.this, MainActivity.class);
-                intent.putExtra("ca_nhan",3);
+                intent.putExtra("current_fragment",3);
                 startActivity(intent);
             }
         });
