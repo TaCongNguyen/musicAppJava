@@ -4,7 +4,6 @@
     android:layout_height="74dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/ripple_effect"
     tools:background="#444444">
     <ImageView
         android:id="@+id/image"
@@ -31,7 +30,6 @@
         app:layout_constraintEnd_toStartOf="@id/menu_button"
         tools:text="Blame"
         android:textSize="14sp"
-        android:ellipsize="end"
         android:maxLines="1"
         android:layout_marginStart="12dp"/>
     <TextView
@@ -58,7 +56,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/ic_more_horiz_black_24dp"
         app:tint="@color/FlatWhite"
-        android:padding="22dp"
-        android:background="@drawable/ripple_effect"/>
+        android:padding="22dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

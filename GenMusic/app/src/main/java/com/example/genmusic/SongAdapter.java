@@ -14,6 +14,7 @@ import com.example.genmusic.theLoaiFragment.TheLoai;
 import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
+
     @NonNull
     private List<Song> ListSong;
 
@@ -27,13 +28,14 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     @Override
     public SongViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
         View view =LayoutInflater.from(parent.getContext()).inflate(R.layout.item_feature_song,parent,false);
+
         return new SongViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull  SongAdapter.SongViewHolder holder, int position) {
         Song song= ListSong.get(position);
-        if(song==null){
+        if(song == null){
             return;
         }
         holder.imageview.setImageResource(song.getImgId());
@@ -45,7 +47,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     @Override
     public int getItemCount() {
-        if(ListSong!=null)
+        if(ListSong != null)
         {
             return ListSong.size();
         }
@@ -54,10 +56,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     public class SongViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView imageview;
-        public TextView title;
-        public TextView description;
-        public ImageView menu_button;
+        private ImageView imageview;
+        private TextView title;
+        private TextView description;
+        private ImageView menu_button;
 
         public SongViewHolder(@NonNull  View itemView) {
             super(itemView);

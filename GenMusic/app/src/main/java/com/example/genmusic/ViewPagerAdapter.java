@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.example.genmusic.caNhanFragment.CaNhanFragment;
 import com.example.genmusic.theLoaiFragment.TheLoaiFragment;
+import com.example.genmusic.trangChuFragment.TrangChuFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {

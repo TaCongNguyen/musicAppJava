@@ -9,7 +9,7 @@ public class Song {
     public Song(int imgId, String title, String description, int imgMenu) {
         this.imgId = imgId;
         this.title = title;
-        Description = description;
+        this.Description = description;
         this.imgMenu = imgMenu;
     }
 

@@ -16,10 +16,14 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.genmusic.trangChuFragment.SongImage;
+import com.example.genmusic.trangChuFragment.SongImageAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.BottomNav);
         viewPager = findViewById(R.id.ViewPager);
 
-
-
         //-----------------------C. Code xử lý -------------------------
 
 
@@ -53,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
         //Xử lý quay về đúng TheLoaiFragment
         troVeTheLoaiFragment();
 
+        //Xử lý quay về đúng CaNhanFragment
+        troVeCaNhanFragment();
+
     }
-
-
-
-
     // CÁC HÀM XỬ LÝ -----------------------------------------------------
+
 
     private void setOnNavBar() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     private void setOnViewPager() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
-
         //Xử lí sự kiện vuốt ngang màn hình
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -129,5 +130,13 @@ public class MainActivity extends AppCompatActivity {
             viewPager.setCurrentItem(index);
 
     }
+
+    private void troVeCaNhanFragment() {
+        Intent intent = getIntent();
+        int index = intent.getIntExtra("ca_nhan", 0);
+        if(index == 3)
+            viewPager.setCurrentItem(index);
+    }
+
 
 }
