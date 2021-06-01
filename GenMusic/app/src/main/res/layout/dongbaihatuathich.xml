@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageViewbaihatuathich"
+        android:scaleType="fitXY"
+        android:layout_width="80dp"
+        android:layout_height="80dp"></ImageView>
+    <TextView
+        android:layout_toRightOf="@+id/imageViewbaihatuathich"
+        android:text="Tên bài hát"
+        android:textColor="@color/black"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
+        android:id="@+id/textviewtenbaihatuathich"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textviewcasibaihatuathich"
+        android:layout_below="@+id/textviewtenbaihatuathich"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
+        android:singleLine="true"
+        android:text="Ca Sĩ"
+        android:layout_toRightOf="@id/imageViewbaihatuathich"
+        android:textSize="18sp"
+        android:textColor="#8c8a8a">
+
+    </TextView>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/imageViewluotthich"
+        android:src="@drawable/iconlove"
+        android:layout_marginRight="10dp">
+
+    </ImageView>
+
+
+
+
+
+</RelativeLayout>

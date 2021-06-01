@@ -8,86 +8,105 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.genmusic.R;
-import com.example.genmusic.theLoaiFragment.PlaylistAdapter;
-import com.example.genmusic.theLoaiFragment.TheLoai;
-import com.example.genmusic.theLoaiFragment.TheLoaiAdapter;
+import com.example.genmusic.bxhFragment.APIService;
+import com.example.genmusic.bxhFragment.Baihatuathich;
+import com.example.genmusic.bxhFragment.BaihatuathichAdapter;
+import com.example.genmusic.bxhFragment.Dataservice;
+import com.example.genmusic.bxhFragment.bxh;
+import com.example.genmusic.bxhFragment.bxhAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class BangXepHangFragment extends Fragment {
-    private View view;
-    private RecyclerView rcvChart;
-    private SongAdapter songAdapter;
-    private PlaylistAdapter playlistAdapter;
+    View view;
+    ListView lvchart;
+    TextView txttitlechart,txtviewmorechart;
+    bxhAdapter bxhadapter;
+    ArrayList<bxh>mangchart;
+
+    RecyclerView recyclerViewtopbaihatuathich;
+    BaihatuathichAdapter baihatuathichAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.bxh_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_bxh, container, false);
+        lvchart=view.findViewById(R.id.listviewchart);
+        txttitlechart=view.findViewById(R.id.textviewtitlechart);
+        txtviewmorechart=view.findViewById(R.id.textviewviewmorechart);
 
-        rcvChart= view.findViewById(R.id.rcvChart);
-
-//        songAdapter =new SongAdapter();
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false);
-//
-//        rcvChart.setFocusable(false);
-//
-//        songAdapter.setData(getListSong());
-//        rcvChart.setAdapter(songAdapter);
-
-        hienthiBaiHat();
-
-
+        recyclerViewtopbaihatuathich=view.findViewById(R.id.recyclerviewtopbaihatuathich);
+        GetData();
+        GetData_baihatuathich();
         return view;
-    }
 
 
 
-    private List<Song> getListSong() {
-        ArrayList<Song> list = new ArrayList<>();
-
-        list.add(new Song(R.drawable.music_empty, "Em của ngày hôm qua","Sơn Tùng MTP",R.drawable.ic_more_horiz_black_24dp));
-        list.add(new Song(R.drawable.music_empty, "Em của ngày hôm qua","Sơn Tùng MTP",R.drawable.ic_more_horiz_black_24dp));
-        list.add(new Song(R.drawable.music_empty, "Em của ngày hôm qua","Sơn Tùng MTP",R.drawable.ic_more_horiz_black_24dp));
-        list.add(new Song(R.drawable.music_empty, "Em của ngày hôm qua","Sơn Tùng MTP",R.drawable.ic_more_horiz_black_24dp));
-        list.add(new Song(R.drawable.music_empty, "Em của ngày hôm qua","Sơn Tùng MTP",R.drawable.ic_more_horiz_black_24dp));
-        list.add(new Song(R.drawable.music_empty, "Em của ngày hôm qua","Sơn Tùng MTP",R.drawable.ic_more_horiz_black_24dp));
-
-        return list;
-    }
-
-
-    private void hienthiBaiHat() {
-        playlistAdapter = new PlaylistAdapter();
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false);
-        rcvChart.setLayoutManager(linearLayoutManager);
-
-        rcvChart.setFocusable(false);
-        rcvChart.setNestedScrollingEnabled(false);
-
-        playlistAdapter.setData(getListData());
-        rcvChart.setAdapter(playlistAdapter);
 
     }
 
-    private List<BaiHat> getListData() {
+    private void GetData_baihatuathich() {
+        Dataservice dataservice=APIService.getService();
+        Call<List<Baihatuathich>> callback=dataservice.GetBaiHatHot();
+        callback.enqueue(new Callback<List<Baihatuathich>>() {
+            @Override
+            public void onResponse(Call<List<Baihatuathich>> call, Response<List<Baihatuathich>> response) {
+                ArrayList<Baihatuathich> baihatuathichArrayList=(ArrayList<Baihatuathich>) response.body();
+                baihatuathichAdapter=new BaihatuathichAdapter(getActivity(),baihatuathichArrayList);
+                LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerViewtopbaihatuathich.setLayoutManager(linearLayoutManager);
+                recyclerViewtopbaihatuathich.setAdapter(baihatuathichAdapter);
+            }
 
-        ArrayList<BaiHat> list = new ArrayList<>();
-        list.add(new BaiHat(R.drawable.baihat_buocquamuacodon, "Bước qua mùa cô đơn","Vũ"));
-        list.add(new BaiHat(R.drawable.baihat_buocquamuacodon, "Bước qua mùa cô đơn","Vũ"));
-        list.add(new BaiHat(R.drawable.baihat_buocquamuacodon, "Bước qua mùa cô đơn","Vũ"));
-        list.add(new BaiHat(R.drawable.baihat_buocquamuacodon, "Bước qua mùa cô đơn","Vũ"));
-        list.add(new BaiHat(R.drawable.baihat_mongphonhoa, "Mộng phồn hoa", "Hoàng Linh"));
-        list.add(new BaiHat(R.drawable.baihat_mongphonhoa, "Mộng phồn hoa", "Hoàng Linh"));
-        list.add(new BaiHat(R.drawable.baihat_mongphonhoa, "Mộng phồn hoa", "Hoàng Linh"));
-        list.add(new BaiHat(R.drawable.baihat_mongphonhoa, "Mộng phồn hoa", "Hoàng Linh"));
+            @Override
+            public void onFailure(Call<List<Baihatuathich>> call, Throwable t) {
 
-        return list;
+            }
+        });
     }
+
+    private void GetData(){
+        Dataservice dataservice= APIService.getService();
+        Call<List<bxh>> callback=dataservice.GetChartCurrentDay();
+        callback.enqueue(new Callback<List<bxh>>() {
+            @Override
+            public void onResponse(Call<List<bxh>> call, Response<List<bxh>> response) {
+                mangchart=(ArrayList<bxh>) response.body();
+                bxhadapter=new bxhAdapter(getActivity(), android.R.layout.simple_list_item_1,mangchart);
+                lvchart.setAdapter(bxhadapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<bxh>> call, Throwable t) {
+
+            }
+        });
+
+
+
+
+
+    }
+
 }

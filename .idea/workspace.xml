@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5409d096-202d-4ee1-ab2d-f200a4db773e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/musicAppJava.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GenMusic/.idea/runConfigurations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GenMusic/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GenMusic/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GenMusic/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GenMusic/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4c2ea335-dd2d-4fcb-a86d-b9e7c2e947a4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/GenMusic/app/src/main/java/com/example/genmusic/BangXepHangFragment.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,32 +15,30 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1tKyCDtsZf1TXGZr71QqKyOQvMK" />
+  <component name="ProjectId" id="1tLSpKvZMBc3f8L6iod1UwgdDpD" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/GenMusic" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5409d096-202d-4ee1-ab2d-f200a4db773e" name="Default Changelist" comment="" />
-      <created>1622531945306</created>
+      <changelist id="4c2ea335-dd2d-4fcb-a86d-b9e7c2e947a4" name="Default Changelist" comment="" />
+      <created>1622547057907</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1622531945306</updated>
+      <updated>1622547057907</updated>
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1622532654269">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1622547076893">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1622532654269" />
+    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1622547076893" />
   </component>
 </project>
