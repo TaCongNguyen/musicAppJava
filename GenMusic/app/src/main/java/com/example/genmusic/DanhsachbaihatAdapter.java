@@ -35,13 +35,13 @@ public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatA
 
     @Override
     public void onBindViewHolder(@NonNull  DanhsachbaihatAdapter.ViewHolder holder, int position) {
-        Baihatuathich baihatuathich=mangbaihat.get(position){
+        Baihatuathich baihatuathich=mangbaihat.get(position);
             holder.txtcasi.setText(baihatuathich.getCasi());
             holder.txttenbaihat.setText(baihatuathich.getTenbaihat());
             holder.txtindex.setText(position +1+"");
 
         }
-    }
+
 
     @Override
     public int getItemCount() {
