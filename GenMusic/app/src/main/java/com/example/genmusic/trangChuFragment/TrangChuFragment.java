@@ -10,13 +10,17 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.genmusic.MainActivity;
 import com.example.genmusic.NewsActivity;
 import com.example.genmusic.R;
+import com.example.genmusic.theLoaiFragment.Album;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -25,6 +29,8 @@ public class TrangChuFragment extends Fragment {
     private ViewPager viewPagerOfHome;
     private CircleIndicator circleIndicator;
     private SongImageAdapter songImageAdapter;
+    private RecyclerView rcvHomeContent;
+    private HomeContentAdapter homeContentAdapter;
 
     @Nullable
     @Override
@@ -33,6 +39,18 @@ public class TrangChuFragment extends Fragment {
 
         viewPagerOfHome = view.findViewById(R.id.vpgSongImage);
         circleIndicator = view.findViewById(R.id.ciSongImage);
+        rcvHomeContent = view.findViewById(R.id.rcv_HomeContent);
+        homeContentAdapter = new HomeContentAdapter(this.getContext());
+
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);
+        rcvHomeContent.setLayoutManager(linearLayoutManager);
+        homeContentAdapter.setData(getListHomeContent());
+        rcvHomeContent.setAdapter(homeContentAdapter);
+
+        //Không cho recycleview cuộn
+        rcvHomeContent.setNestedScrollingEnabled(false);
+        rcvHomeContent.setFocusable(false);
 
         //Xử lý slide show bài hát
         setOnSlideShow();
@@ -65,4 +83,26 @@ public class TrangChuFragment extends Fragment {
 
         return list;
     }
+
+    private List<HomeContent> getListHomeContent() {
+        List<HomeContent> listHomeContent = new ArrayList<>();
+        List<Album> listAlbum = new ArrayList<>();
+        listAlbum.add(new Album(R.drawable.album_batnhiem, "Bất Nhiễm OST"));
+        listAlbum.add(new Album(R.drawable.album_changes, "Changes"));
+        listAlbum.add(new Album(R.drawable.album_fearless, "Fearless"));
+        listAlbum.add(new Album(R.drawable.album_chiconlaiquakhu, "Chỉ còn lại quá khứ"));
+        listAlbum.add(new Album(R.drawable.album_batnhiem, "Bất Nhiễm OST"));
+        listAlbum.add(new Album(R.drawable.album_changes, "Changes"));
+        listAlbum.add(new Album(R.drawable.album_fearless, "Fearless"));
+        listAlbum.add(new Album(R.drawable.album_chiconlaiquakhu, "Chỉ còn lại quá khứ"));
+
+        listHomeContent.add(new HomeContent("Có thể bạn muốn nghe", listAlbum));
+        listHomeContent.add(new HomeContent("Album nổi bật", listAlbum));
+        listHomeContent.add(new HomeContent("Tin tức hot", listAlbum));
+        listHomeContent.add(new HomeContent("Top BXH", listAlbum));
+
+        return listHomeContent;
+    }
+
+
 }
