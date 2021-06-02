@@ -48,6 +48,10 @@ public class TrangChuFragment extends Fragment {
         homeContentAdapter.setData(getListHomeContent());
         rcvHomeContent.setAdapter(homeContentAdapter);
 
+        //Không cho recycleview cuộn
+        rcvHomeContent.setNestedScrollingEnabled(false);
+        rcvHomeContent.setFocusable(false);
+
         //Xử lý slide show bài hát
         setOnSlideShow();
 
@@ -99,4 +103,6 @@ public class TrangChuFragment extends Fragment {
 
         return listHomeContent;
     }
+
+
 }
