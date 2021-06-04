@@ -1,28 +1,20 @@
 package com.example.genmusic.bxhFragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.genmusic.PlayNhacActivity;
 import com.example.genmusic.R;
 import com.example.genmusic.bxhFragment.Baihatuathich;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BaihatuathichAdapter extends  RecyclerView.Adapter<BaihatuathichAdapter.ViewHolder>{
     @NonNull
@@ -66,37 +58,6 @@ public class BaihatuathichAdapter extends  RecyclerView.Adapter<BaihatuathichAda
             txtcasi=itemView.findViewById(R.id.textviewcasibaihatuathich);
             imghinh=itemView.findViewById(R.id.imageViewbaihatuathich);
             imgluotthich=itemView.findViewById(R.id.imageViewluotthich);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(context, PlayNhacActivity.class);
-                    intent.putExtra("cakhuc",baihatuathichArrayList.get(getPosition()));
-                    context.startActivity(intent);
-                }
-            });
-            imgluotthich.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    imgluotthich.setImageResource(R.drawable.iconloved);;
-                    Dataservice dataservice= APIService.getService();
-                    Call<String> callback=dataservice.UpdateLuotThich("1",baihatuathichArrayList.get(getPosition()).getIdbaihat());
-                    /*callback.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            String ketqua= response.body();
-                            if(ketqua.equals("Success")){
-                                Toast.makeText(context,"da thich",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-
-                        }
-                    });*/
-                    imgluotthich.setEnabled(false);
-                }
-            });
         }
     }
 }

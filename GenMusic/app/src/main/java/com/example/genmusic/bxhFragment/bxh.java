@@ -3,9 +3,7 @@ package com.example.genmusic.bxhFragment;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class bxh implements Serializable {
+public class bxh {
 
     @SerializedName("IdChart")
     @Expose

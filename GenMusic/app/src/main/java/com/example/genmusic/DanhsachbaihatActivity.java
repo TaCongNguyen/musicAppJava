@@ -3,10 +3,8 @@ package com.example.genmusic;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,12 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.genmusic.bxhFragment.APIService;
-import com.example.genmusic.bxhFragment.Baihatuathich;
-import com.example.genmusic.bxhFragment.Dataservice;
-import com.example.genmusic.bxhFragment.bxh;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -28,12 +21,6 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DanhsachbaihatActivity extends AppCompatActivity {
     CoordinatorLayout coordinatorLayout;
@@ -42,45 +29,17 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     RecyclerView recyclerViewdanhsachbaihat;
     FloatingActionButton floatingActionButton;
     ImageView imgdanhsachcakhuc;
+
     DanhsachbaihatAdapter danhsachbaihatAdapter;
-    bxh chart;
-    ArrayList<Baihatuathich> mangbaihat;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danhsachbaihat);
-        DataIntent();
         anhxa();
         init();
-        if(chart!=null&&!chart.getTen().equals("")){
-            setValueInView(chart.getTen(),chart.getHinh());
-            GetDataChart(chart.getIdChart());
-        }
-        
+
     }
-
-    private void GetDataChart(String idxephang) {
-        Dataservice dataservice= APIService.getService();
-        Call<List<Baihatuathich>> callback=dataservice.GetDanhsachbaihatuathichtheochart(idxephang);
-        callback.enqueue(new Callback<List<Baihatuathich>>() {
-            @Override
-            public void onResponse(Call<List<Baihatuathich>> call, Response<List<Baihatuathich>> response) {
-                mangbaihat=(ArrayList<Baihatuathich>)response.body();
-                danhsachbaihatAdapter=new DanhsachbaihatAdapter(DanhsachbaihatActivity.this,mangbaihat);
-                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
-                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<Baihatuathich>> call, Throwable t) {
-
-            }
-        });
-    }
-
-    private void setValueInView(String ten, String hinh) {
+    private void SetValueInView(String ten, String hinh){
         collapsingToolbarLayout.setTitle(ten);
 
         try {
@@ -99,20 +58,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         }
         Picasso.with(this).load(hinh).into(imgdanhsachcakhuc);
     }
-
-    private void DataIntent() {
-        Intent intent=getIntent();
-        if(intent!=null)
-        {
-            if(intent.hasExtra("itemchart")){
-                chart= (bxh) intent.getSerializableExtra("itemchart");
-
-
-            }
-        }
-    }
-
-
     private void init() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -123,9 +68,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-        floatingActionButton.setEnabled(false);
     }
 
     private void anhxa() {
@@ -135,15 +78,5 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         recyclerViewdanhsachbaihat=findViewById(R.id.recyclerviewtopbaihatuathich);
         imgdanhsachcakhuc=findViewById(R.id.imageviewdanhsachcakhuc);
         floatingActionButton=findViewById(R.id.floatingactionbutton);
-    }
-    private void eventClick(){
-        floatingActionButton.setEnabled(true);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(DanhsachbaihatActivity.this,PlayNhacActivity.class);
-                intent.putExtra("cacbaihat",mangbaihat);
-            }
-        });
     }
 }
