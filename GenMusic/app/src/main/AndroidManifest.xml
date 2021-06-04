@@ -15,9 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GenMusic">
-
         <activity android:name=".PlayNhacActivity"></activity>
-
         <activity android:name=".DanhsachbaihatActivity" />
         <activity android:name=".Setting" />
         <activity android:name=".UserSetting" />

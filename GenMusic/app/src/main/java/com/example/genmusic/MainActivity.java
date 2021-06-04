@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     // CÁC HÀM XỬ LÝ -----------------------------------------------------
-
 
 
     private void setOnNavBar() {

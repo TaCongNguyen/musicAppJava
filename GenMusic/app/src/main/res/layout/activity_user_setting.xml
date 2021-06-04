@@ -54,27 +54,15 @@
             android:src="@drawable/ic_account"></ImageView>
 
         <TextView
-            android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_8dp"
-            android:layout_toEndOf="@id/imgUser"
             android:text="Tên User"
-            android:textColor="@color/white"
             android:textSize="@dimen/_24dp"
-            android:textStyle="bold"></TextView>
-
-        <TextView
-            android:id="@+id/userEmail"
-            android:layout_width="198dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/userName"
-            android:layout_alignStart="@+id/imgUser"
-            android:layout_marginStart="59dp"
-            android:layout_marginTop="6dp"
-            android:text="Email"
-            android:textColor="#FFFFFF" />
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/imgUser"
+            android:layout_marginStart="@dimen/_8dp"></TextView>
     </RelativeLayout>
 
     <RelativeLayout
@@ -112,7 +100,6 @@
         android:layout_marginTop="@dimen/_8dp">
 
         <ImageView
-            android:id="@+id/imgLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
