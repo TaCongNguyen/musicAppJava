@@ -1,10 +1,13 @@
 package com.example.genmusic.bxhFragment;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class Baihatuathich {
+public class Baihatuathich implements Parcelable {
 
     @SerializedName("Idbaihat")
     @Expose
@@ -24,6 +27,27 @@ public class Baihatuathich {
     @SerializedName("Luotthich")
     @Expose
     private String luotthich;
+
+    protected Baihatuathich(Parcel in) {
+        idbaihat = in.readString();
+        tenbaihat = in.readString();
+        hinhbaihat = in.readString();
+        casi = in.readString();
+        linkbaihat = in.readString();
+        luotthich = in.readString();
+    }
+
+    public static final Creator<Baihatuathich> CREATOR = new Creator<Baihatuathich>() {
+        @Override
+        public Baihatuathich createFromParcel(Parcel in) {
+            return new Baihatuathich(in);
+        }
+
+        @Override
+        public Baihatuathich[] newArray(int size) {
+            return new Baihatuathich[size];
+        }
+    };
 
     public String getIdbaihat() {
         return idbaihat;
@@ -73,4 +97,18 @@ public class Baihatuathich {
         this.luotthich = luotthich;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(idbaihat);
+        dest.writeString(tenbaihat);
+        dest.writeString(hinhbaihat);
+        dest.writeString(casi);
+        dest.writeString(linkbaihat);
+        dest.writeString(luotthich);
+    }
 }
