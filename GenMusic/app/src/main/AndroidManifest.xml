@@ -40,7 +40,8 @@
             android:label="@string/title_activity_news" /> <!-- <activity android:name=".theLoaiFragment.AlbumPlaylist" /> -->
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTask"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".caNhanFragment.BaiHatDaTai" />
         <activity android:name=".SplashActivity">

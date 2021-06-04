@@ -29,6 +29,7 @@ public class Setting extends AppCompatActivity {
                 Intent intent = new Intent(Setting.this, MainActivity.class);
                 intent.putExtra("current_fragment",index);
                 startActivity(intent);
+                finish();
             }
         });
     }

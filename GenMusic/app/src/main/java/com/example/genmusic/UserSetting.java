@@ -30,6 +30,7 @@ public class UserSetting extends AppCompatActivity {
                 Intent intent = new Intent(UserSetting.this, MainActivity.class);
                 intent.putExtra("current_fragment",index);
                 startActivity(intent);
+                finish();
             }
         });
     }

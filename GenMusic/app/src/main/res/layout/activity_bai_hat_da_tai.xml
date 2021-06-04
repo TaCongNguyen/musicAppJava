@@ -15,8 +15,7 @@
         <RelativeLayout
             android:layout_marginTop="@dimen/_8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/_8dp">
+            android:layout_height="wrap_content">
 
             <ImageButton
                 android:id="@+id/imgTroVeCaNhan"
@@ -24,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/arrow_back"
                 android:layout_marginEnd="@dimen/_8dp"
-                android:background="@drawable/selected_effect"></ImageButton>
+                android:padding="@dimen/_8dp"
+                android:background="@null"></ImageButton>
 
             <TextView
                 android:layout_width="wrap_content"
