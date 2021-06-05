@@ -78,6 +78,15 @@ public class LoginActivity extends AppCompatActivity {
         twiter.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(800).start();
         twiter.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(100).start();
 
+        twiter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("current_fragment",viewPager.getCurrentItem());
+                startActivity(intent);
+                ;
+            }
+        });
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
