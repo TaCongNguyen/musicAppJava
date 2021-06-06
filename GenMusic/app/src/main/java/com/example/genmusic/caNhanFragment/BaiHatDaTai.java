@@ -82,6 +82,7 @@ public class BaiHatDaTai extends AppCompatActivity {
                 Intent intent = new Intent(BaiHatDaTai.this, MainActivity.class);
                 intent.putExtra("current_fragment",3);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setOnNavBar();
 
         //Xử lý quay về đúng TheLoaiFragment
-        backToTheLoaiFragment();
+        backToExactlyFragment();
 
 
 
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void backToTheLoaiFragment() {
+    private void backToExactlyFragment() {
         intent = getIntent();
         int index = intent.getIntExtra("current_fragment", 0);
         viewPager.setCurrentItem(index);
@@ -146,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
+                //finish();
+
             }
         });
 
@@ -158,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, UserSetting.class);
                 intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
+                //finish();
             }
         });
 
@@ -169,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, Setting.class);
                 intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
+                //finish();
             }
         });
 
