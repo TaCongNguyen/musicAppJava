@@ -279,4 +279,7 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_detailed_news">DetailedNews</string>
+
+    <string name="facebook_app_id">4513407608686734</string> <string name="fb_login_protocol_scheme">fb4513407608686734</string>
+
 </resources>

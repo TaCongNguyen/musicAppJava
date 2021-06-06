@@ -13,12 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
@@ -27,7 +29,7 @@ public class UserSetting extends AppCompatActivity {
     TextView Name, Email;
     ImageView Image, Logout;
     GoogleSignInClient mGoogleSignInClient;
-
+    FirebaseAuth auth= FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class UserSetting extends AppCompatActivity {
                 switch (v.getId()) {
                     // ...
                     case R.id.imgLogout:
+                        auth.signOut();
+                        LoginManager.getInstance().logOut();
+                        finish();
                         signOut();
                         break;
                     // ...
@@ -59,6 +64,19 @@ public class UserSetting extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
+
+        if(auth!=null){
+            if(auth.getCurrentUser()!=null){
+
+                if(auth.getCurrentUser().getDisplayName()!=null){
+                    Name.setText(auth.getCurrentUser().getDisplayName());
+                    Email.setText(auth.getCurrentUser().getEmail());
+                    Glide.with(this).load(String.valueOf(auth.getCurrentUser().getPhotoUrl())).into(Image);
+                }
+
+            }
+        }
+
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             String personName = acct.getDisplayName();
@@ -69,7 +87,7 @@ public class UserSetting extends AppCompatActivity {
 
             Name.setText(personName);
             Email.setText(personEmail);
-            //Glide.with(this).load(String.valueOf(personPhoto)).into(Image);
+            Glide.with(this).load(String.valueOf(personPhoto)).into(Image);
 
 
         }
