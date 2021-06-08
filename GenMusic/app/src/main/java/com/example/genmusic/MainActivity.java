@@ -11,7 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setOnNavBar();
 
         //Xử lý quay về đúng TheLoaiFragment
-        backToTheLoaiFragment();
+        backToExactlyFragment();
 
 
 
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void backToTheLoaiFragment() {
+    private void backToExactlyFragment() {
         intent = getIntent();
         int index = intent.getIntExtra("current_fragment", 0);
         viewPager.setCurrentItem(index);
@@ -145,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
+                //finish();
+
             }
         });
 
@@ -157,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, UserSetting.class);
                 intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
+                //finish();
             }
         });
 
@@ -168,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, Setting.class);
                 intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
+                //finish();
             }
         });
 

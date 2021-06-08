@@ -33,6 +33,7 @@ public class Search extends AppCompatActivity {
                 Intent intent = new Intent(Search.this, MainActivity.class);
                 intent.putExtra("current_fragment",index);
                 startActivity(intent);
+                finish();
             }
         });
     }

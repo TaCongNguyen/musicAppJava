@@ -93,6 +93,32 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56dp"
+        android:background="@drawable/selected_effect"
+        android:layout_marginTop="@dimen/_8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/arrow_next"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giao diện"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_16dp"
+            ></TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/RlayoutVersion"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_56dp"
@@ -110,7 +136,83 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phiên bản hiện tại"
+            android:text="Phiên bản"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_16dp"
+            ></TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56dp"
+        android:background="@drawable/selected_effect"
+        android:layout_marginTop="@dimen/_8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/arrow_next"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trợ giúp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_16dp"
+            ></TextView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56dp"
+        android:background="@drawable/selected_effect"
+        android:layout_marginTop="@dimen/_8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/arrow_next"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Góp ý, báo lỗi"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_16dp"
+            ></TextView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56dp"
+        android:background="@drawable/selected_effect"
+        android:layout_marginTop="@dimen/_8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/arrow_next"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Điều khoản dịch vụ"
             android:textSize="20dp"
             android:textColor="@color/black"
             android:layout_centerVertical="true"
