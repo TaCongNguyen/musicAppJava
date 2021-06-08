@@ -1,11 +1,15 @@
 package com.example.genmusic;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +18,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -47,7 +52,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     bxh chart;
     ArrayList<Baihatuathich> mangbaihat;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +61,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         DataIntent();
         anhxa();
         init();
-        if(chart!=null&&!chart.getTen().equals("")){
+        if(chart!=null && !chart.getTen().equals("")){
             setValueInView(chart.getTen(),chart.getHinh());
             GetDataChart(chart.getIdChart());
         }
@@ -72,7 +76,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             public void onResponse(Call<List<Baihatuathich>> call, Response<List<Baihatuathich>> response) {
                 mangbaihat=(ArrayList<Baihatuathich>)response.body();
                 danhsachbaihatAdapter=new DanhsachbaihatAdapter(DanhsachbaihatActivity.this,mangbaihat);
-                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this));
+
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this, RecyclerView.VERTICAL, false));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
             }
 
@@ -104,7 +109,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     }
 
     private void DataIntent() {
-        Intent intent=getIntent();
+        Intent intent= getIntent();
         if(intent!=null)
         {
             if(intent.hasExtra("itemchart")){
@@ -135,7 +140,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         coordinatorLayout=findViewById(R.id.coordinatorlayout);
         collapsingToolbarLayout=findViewById(R.id.collapsingtoolbar);
         toolbar=findViewById(R.id.toolbardanhsach);
-        recyclerViewdanhsachbaihat=findViewById(R.id.recyclerviewtopbaihatuathich);
+        recyclerViewdanhsachbaihat=findViewById(R.id.recyclerviewdanhsachbaihat);
         imgdanhsachcakhuc=findViewById(R.id.imageviewdanhsachcakhuc);
         floatingActionButton=findViewById(R.id.floatingactionbutton);
     }

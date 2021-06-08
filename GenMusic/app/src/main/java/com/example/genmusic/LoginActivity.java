@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("current_fragment",viewPager.getCurrentItem());
                 startActivity(intent);
-                ;
+
             }
         });
         google.setOnClickListener(new View.OnClickListener() {
