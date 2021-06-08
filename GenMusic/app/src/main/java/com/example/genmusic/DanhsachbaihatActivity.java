@@ -61,6 +61,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         DataIntent();
         anhxa();
         init();
+        eventClick();
         if(chart!=null && !chart.getTen().equals("")){
             setValueInView(chart.getTen(),chart.getHinh());
             GetDataChart(chart.getIdChart());
@@ -131,7 +132,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         floatingActionButton.setEnabled(false);
     }
