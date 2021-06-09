@@ -249,13 +249,14 @@ public class PlayNhacActivity extends AppCompatActivity {
                 mangbaihat.add(baihatuathich);
             }
             if(intent.hasExtra("cacbaihat")){
-                ArrayList<Baihatuathich> baihaArrayList=intent.getParcelableArrayListExtra("cacbaihat");
-                mangbaihat=baihaArrayList;
+                ArrayList<Baihatuathich> mangBaiHat=intent.getParcelableArrayListExtra("cacbaihat");
+                mangbaihat=mangBaiHat;
+                }
             }
         }
 
 
-    }
+    
 
     private void init() {
         toolbarplaynhac=findViewById((R.id.toolbarplaynhac));

@@ -61,7 +61,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         DataIntent();
         anhxa();
         init();
-        eventClick();
+
         if(chart!=null && !chart.getTen().equals("")){
             setValueInView(chart.getTen(),chart.getHinh());
             GetDataChart(chart.getIdChart());
@@ -80,6 +80,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
 
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(DanhsachbaihatActivity.this, RecyclerView.VERTICAL, false));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
+                eventClick();
             }
 
             @Override
@@ -151,6 +152,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(DanhsachbaihatActivity.this,PlayNhacActivity.class);
                 intent.putExtra("cacbaihat",mangbaihat);
+                startActivity(intent);
             }
         });
     }
