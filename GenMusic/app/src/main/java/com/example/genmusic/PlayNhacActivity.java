@@ -32,7 +32,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     Toolbar toolbarplaynhac;
     TextView txtTimesong,txtTotaltimesong;
     SeekBar sktime;
-    ImageButton imgplay,imgrepeat,imgnext,impre,imgrandom;
+    ImageButton imgplay,imgrepeat,imgnext,imgpre,imgrandom;
     ViewPager viewPagerplaynhac;
     public static ArrayList<Baihatuathich> mangbaihat=new ArrayList<>();
     public static ViewPagerPlaylistnhac adapternhac;
@@ -178,21 +178,22 @@ public class PlayNhacActivity extends AppCompatActivity {
                     }
 
                 }
-                impre.setClickable(false);
+                imgpre.setClickable(false);
                 imgnext.setClickable(false);
                 Handler handler1=new Handler();
                 handler1.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        imgrepeat.setClickable(true);
+                        imgpre.setClickable(true);
                         imgnext.setClickable(true);
                     }
                 },5000);
             }
         });
-        impre.setOnClickListener(new View.OnClickListener() {
+        imgpre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(mangbaihat.size()>0){
                     if(mediaPlayer.isPlaying()||mediaPlayer!=null){
                         mediaPlayer.stop();
@@ -202,10 +203,12 @@ public class PlayNhacActivity extends AppCompatActivity {
                     if(position<(mangbaihat.size())){
                         imgplay.setImageResource(R.drawable.iconpause);
                         position--;
-                        if(position<0){
+                        if(position<0)
+                        {
                             position=mangbaihat.size()-1;
                         }
                         if(repeat==true){
+
                             position+=1;
                         }
                         if(checkrandom==true){
@@ -219,19 +222,18 @@ public class PlayNhacActivity extends AppCompatActivity {
 
                         new PlayMp3().execute(mangbaihat.get(position).getLinkbaihat());
                         fragment_dia_nhac.Playnhac(mangbaihat.get(position).getHinhbaihat());
-
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
                         UpdateTime();
                     }
 
                 }
-                impre.setClickable(false);
+                imgpre.setClickable(false);
                 imgnext.setClickable(false);
                 Handler handler1=new Handler();
                 handler1.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        imgrepeat.setClickable(true);
+                        imgpre.setClickable(true);
                         imgnext.setClickable(true);
                     }
                 },5000);
@@ -267,7 +269,7 @@ public class PlayNhacActivity extends AppCompatActivity {
         imgrepeat=findViewById(R.id.imagebuttonrepeat);
         imgnext=findViewById(R.id.imagebuttonnext);
         imgrandom=findViewById(R.id.imagebuttonsuffle);
-        impre=findViewById(R.id.imagebuttonpre);
+        imgpre=findViewById(R.id.imagebuttonpre);
         viewPagerplaynhac=findViewById(R.id.viewpagerplaynhac);
         setSupportActionBar(toolbarplaynhac);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -395,7 +397,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                     }
 
 
-                impre.setClickable(false);
+                imgpre.setClickable(false);
                 imgnext.setClickable(false);
                 Handler handler1=new Handler();
                 handler1.postDelayed(new Runnable() {
