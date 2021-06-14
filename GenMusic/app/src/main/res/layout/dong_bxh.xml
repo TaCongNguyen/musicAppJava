@@ -14,7 +14,7 @@
     <View
         android:focusableInTouchMode="false"
         android:focusable="false"
-        android:background="@drawable/custom_background_banner"
+        android:background="@drawable/dong_bxh"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="5dp"

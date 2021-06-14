@@ -80,12 +80,13 @@ public class BaihatuathichAdapter extends  RecyclerView.Adapter<BaihatuathichAda
                     imgluotthich.setImageResource(R.drawable.iconloved);;
                     Dataservice dataservice= APIService.getService();
                     Call<String> callback=dataservice.UpdateLuotThich("1",baihatuathichArrayList.get(getPosition()).getIdbaihat());
+                    Toast.makeText(context,"Đã thích",Toast.LENGTH_SHORT).show();
                     /*callback.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             String ketqua= response.body();
                             if(ketqua.equals("Success")){
-                                Toast.makeText(context,"da thich",Toast.LENGTH_SHORT).show();
+
                             }
                         }
 
