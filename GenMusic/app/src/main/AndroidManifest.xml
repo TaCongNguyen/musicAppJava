@@ -22,7 +22,14 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".PlayNhacActivity" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".PlayNhacActivity"></activity>
+
         <activity android:name=".DanhsachbaihatActivity" />
         <activity android:name=".Setting" />
         <activity android:name=".UserSetting" />
