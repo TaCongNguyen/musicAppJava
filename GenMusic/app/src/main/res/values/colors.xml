@@ -7,7 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey">#A7A7A7</color>
+    <color name="grey">#7C7C7C</color>
     <color name="purple">#C829AF</color>
 
     <color name= "SurfaceColor">#FFCC00</color>
@@ -98,4 +98,6 @@
     <color name="greenStart">#a7f56e</color>
     <color name="greenEnd">#11c612</color>
     <color name="flatGreenEnd">#00BF84</color>
+<!--    transparent-->
+    <color name="transparent">#80000000</color>
 </resources>

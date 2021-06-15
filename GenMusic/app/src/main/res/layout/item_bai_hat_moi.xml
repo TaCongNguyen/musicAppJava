@@ -3,55 +3,53 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
     android:layout_marginTop="10dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:layout_marginBottom="@dimen/_16dp"
-    app:cardElevation="0dp">
+    app:cardPreventCornerOverlap="false">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="6dp">
-            <ImageView
-                android:id="@+id/imgHinhAlbum"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:src="@drawable/album_batnhiem"
-                android:scaleType="centerCrop"
-                ></ImageView>
-        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/imgHinhBaiHatMoi"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/album_batnhiem"
+            android:scaleType="centerCrop"
+            ></ImageView>
+
         <TextView
-            android:id="@+id/txtTenAlbum"
+            android:id="@+id/txtTenBaiHatMoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:text="Bất Nhiễm OST"
             android:padding="2dp"
             android:gravity="center"
             android:maxLines="1"
             android:ellipsize="end"
-            android:maxWidth="130dp"
+            android:maxWidth="150dp"
             ></TextView>
 
         <TextView
-            android:id="@+id/txtTenCaSiAlbum"
+            android:id="@+id/txtTenCaSiMoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="@color/grey"
+            android:textSize="12sp"
+            android:textColor="@color/black"
             android:text="Various Artists"
             android:padding="2dp"
             android:gravity="center"
             android:maxLines="1"
             android:ellipsize="end"
-            android:maxWidth="130dp"
+            android:maxWidth="150dp"
             ></TextView>
 
     </LinearLayout>

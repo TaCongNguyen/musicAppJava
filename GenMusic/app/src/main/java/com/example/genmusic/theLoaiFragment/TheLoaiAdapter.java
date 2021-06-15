@@ -11,62 +11,56 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.genmusic.DanhsachbaihatActivity;
 import com.example.genmusic.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class TheLoaiAdapter extends RecyclerView.Adapter<TheLoaiAdapter.TheLoaiViewHolder>{
 
-    //Lưu context
     private Context context;
-    //Tạo list chứa các thể loại
     private List<TheLoai> ListTheLoai;
 
-    //Hàm đổ dữ liệu vào List
-    public void setData(List<TheLoai> list)
-    {
-        this.ListTheLoai = list;
-        notifyDataSetChanged();
+    public TheLoaiAdapter(Context context, List<TheLoai> listTheLoai) {
+        this.context = context;
+        ListTheLoai = listTheLoai;
     }
 
-    @NonNull
     @Override
-    public TheLoaiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TheLoaiViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_the_loai, parent, false);
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_the_loai, parent, false);
-
-        //Lưu context
-        context = parent.getContext();
         return new TheLoaiViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  TheLoaiAdapter.TheLoaiViewHolder holder, int position) {
+    public void onBindViewHolder( TheLoaiAdapter.TheLoaiViewHolder holder, int position) {
 
         TheLoai theLoai = ListTheLoai.get(position);
         if(theLoai == null)
+        {
             return;
+        }
         else
         {
-            holder.imgTheLoai.setImageResource(theLoai.getImgId());
-            holder.txtTieuDeTheLoai.setText(theLoai.getTieuDe());
+            holder.txtTenTheLoai.setText(theLoai.getTentheloai());
+            Picasso.with(context).load(theLoai.getHinhtheloai()).into(holder.imgHinhTheLoai);
 
+            //click
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Intent intent = new Intent(context, Playlist.class);
+                    Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                    intent.putExtra("theloai", ListTheLoai.get(position));
                     context.startActivity(intent);
-
                 }
             });
         }
-
     }
 
     @Override
     public int getItemCount() {
-
         if(ListTheLoai != null)
         {
             return ListTheLoai.size();
@@ -74,16 +68,16 @@ public class TheLoaiAdapter extends RecyclerView.Adapter<TheLoaiAdapter.TheLoaiV
         return 0;
     }
 
-    public class TheLoaiViewHolder extends RecyclerView.ViewHolder{
+    public class TheLoaiViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imgTheLoai;
-        private TextView txtTieuDeTheLoai;
+        TextView txtTenTheLoai;
+        ImageView imgHinhTheLoai;
 
-        public TheLoaiViewHolder(@NonNull View itemView) {
+        public TheLoaiViewHolder( View itemView) {
             super(itemView);
 
-            imgTheLoai = itemView.findViewById(R.id.imgTheLoai);
-            txtTieuDeTheLoai = itemView.findViewById(R.id.txtTieuDeTheLoai);
+            txtTenTheLoai = itemView.findViewById(R.id.txtTenTheLoai);
+            imgHinhTheLoai = itemView.findViewById(R.id.imgHinhTheLoai);
 
         }
     }

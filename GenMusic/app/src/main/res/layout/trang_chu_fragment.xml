@@ -5,47 +5,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@color/white">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vpgSongImage"
+        <RelativeLayout
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            ></androidx.viewpager.widget.ViewPager>
+            android:layout_height="wrap_content">
 
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/ciSongImage"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginBottom="8dp"
-            />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vpgSongImage"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                ></androidx.viewpager.widget.ViewPager>
 
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_HomeContent"
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/ciSongImage"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:layout_alignEnd="@+id/vpgSongImage"
+                android:layout_alignStart="@+id/vpgSongImage"
+                android:layout_alignBottom="@+id/vpgSongImage"
+                />
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardCornerRadius="@dimen/_16dp"
+            >
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                tools:layout_editor_absoluteX="0dp" />
+                android:background="@drawable/news_bg">
 
-        <Button
-            android:id="@+id/btnMoNhac"
-            android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TIN ÂM NHẠC HOT"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"></TextView>
+                <Button
+                    android:id="@+id/btnMoNhac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Đọc ngay"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="40dp"
-            android:text="Tin Tức Âm Nhạc"
-            />
+            android:text="Nghe gì hôm nay"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="10dp"
+            ></TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvGoiYTheLoai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Album mới phát hành"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="10dp"
+            ></TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvAlbumMoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bài hát mới phát hành"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="10dp"
+            ></TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvBaiHatMoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
 
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
 

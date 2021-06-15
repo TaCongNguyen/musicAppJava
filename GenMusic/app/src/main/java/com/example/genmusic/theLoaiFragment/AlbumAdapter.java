@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.genmusic.DanhsachbaihatActivity;
 import com.example.genmusic.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -22,12 +24,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     //Tạo list chứa các thể loại
     private List<Album> ListAlbum;
 
-    //Hàm đổ dữ liệu vào List
-    public void setData(List<Album> list)
-    {
-        this.ListAlbum = list;
-        notifyDataSetChanged();
+    public AlbumAdapter(Context context, List<Album> listAlbum) {
+        this.context = context;
+        ListAlbum = listAlbum;
     }
+
+
 
     //Hàm khởi tạo adapter và kết nối với layout xml
     @NonNull
@@ -35,9 +37,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_album, parent, false);
-
-        //Lưu context vào biến
-        context = parent.getContext();
 
         return new AlbumViewHolder(view);
     }
@@ -51,18 +50,19 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             return;
         else
         {
-            holder.imgAlbum.setImageResource(album.getImgId());
-            holder.txtTieuDeAlbum.setText(album.getTieuDe());
+            holder.txtTenAlbum.setText(album.getTenAlbum());
+            holder.txtTenCaSiAlbum.setText(album.getTenCaSiAlbum());
+            Picasso.with(context).load(album.getHinhAlbum()).into(holder.imgHinhAlbum);
 
+            //sự kiện click vào mỗi cardview
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(context, Playlist.class);
+                    Intent intent = new Intent(context, DanhsachbaihatActivity.class);
+                    intent.putExtra("album", ListAlbum.get(position));
                     context.startActivity(intent);
                 }
-
-
             });
         }
 
@@ -80,14 +80,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
     public class AlbumViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView imgAlbum;
-        private TextView txtTieuDeAlbum;
+        private ImageView imgHinhAlbum;
+        private TextView txtTenAlbum, txtTenCaSiAlbum;
 
         public AlbumViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imgAlbum = itemView.findViewById(R.id.imgAlbum);
-            txtTieuDeAlbum = itemView.findViewById(R.id.txtTieuDeAlbum);
+            imgHinhAlbum = itemView.findViewById(R.id.imgHinhAlbum);
+            txtTenAlbum = itemView.findViewById(R.id.txtTenAlbum);
+            txtTenCaSiAlbum = itemView.findViewById(R.id.txtTenCaSiAlbum);
+
 
         }
     }

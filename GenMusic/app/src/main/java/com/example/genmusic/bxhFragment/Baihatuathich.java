@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class Baihatuathich implements Parcelable {
+public class Baihatuathich implements Parcelable{
 
     @SerializedName("Idbaihat")
     @Expose

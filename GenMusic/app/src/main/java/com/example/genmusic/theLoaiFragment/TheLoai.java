@@ -1,28 +1,55 @@
 package com.example.genmusic.theLoaiFragment;
 
-public class TheLoai {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    private int imgId;
-    private String TieuDe;
+import java.io.Serializable;
 
-    public TheLoai(int imgId, String tieuDe) {
-        this.imgId = imgId;
-        TieuDe = tieuDe;
-    }
+public class TheLoai implements Serializable {
 
-    public int getImgId() {
-        return imgId;
-    }
+@SerializedName("Idtheloai")
+@Expose
+private String idtheloai;
+@SerializedName("IdChuDe")
+@Expose
+private String idChuDe;
+@SerializedName("Tentheloai")
+@Expose
+private String tentheloai;
+@SerializedName("Hinhtheloai")
+@Expose
+private String hinhtheloai;
 
-    public void setImgId(int imgId) {
-        this.imgId = imgId;
-    }
+public String getIdtheloai() {
+return idtheloai;
+}
 
-    public String getTieuDe() {
-        return TieuDe;
-    }
+public void setIdtheloai(String idtheloai) {
+this.idtheloai = idtheloai;
+}
 
-    public void setTieuDe(String tieuDe) {
-        TieuDe = tieuDe;
-    }
+public String getIdChuDe() {
+return idChuDe;
+}
+
+public void setIdChuDe(String idChuDe) {
+this.idChuDe = idChuDe;
+}
+
+public String getTentheloai() {
+return tentheloai;
+}
+
+public void setTentheloai(String tentheloai) {
+this.tentheloai = tentheloai;
+}
+
+public String getHinhtheloai() {
+return hinhtheloai;
+}
+
+public void setHinhtheloai(String hinhtheloai) {
+this.hinhtheloai = hinhtheloai;
+}
+
 }

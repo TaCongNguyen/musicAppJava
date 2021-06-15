@@ -1,27 +1,36 @@
 package com.example.genmusic.theLoaiFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.genmusic.R;
+import com.example.genmusic.bxhFragment.APIService;
+import com.example.genmusic.bxhFragment.Dataservice;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TheLoaiFragment extends Fragment {
 
     //A. Khai báo biến
     private View view;
-    private RecyclerView rcvAlbum, rcvTheLoai;
-    private TheLoaiAdapter theLoaiAdapter;
+    private TextView txtXemThem;
+    private RecyclerView rcvAlbum, rcvChuDeTamTrang, rcvTheLoai, rcvChuDeQuocGia, rcvChuDe;
+    private ChuDeAdapter chuDeAdapter;
     private AlbumAdapter albumAdapter;
 
     @Nullable
@@ -32,65 +41,118 @@ public class TheLoaiFragment extends Fragment {
         //B. Ánh xạ view
 
         rcvAlbum = view.findViewById(R.id.rcvAlbum);
+        rcvChuDeTamTrang = view.findViewById(R.id.rcvChuDeTamTrang);
         rcvTheLoai = view.findViewById(R.id.rcvTheLoai);
+        rcvChuDeQuocGia = view.findViewById(R.id.rcvChuDeQuocGia);
+        rcvChuDe = view.findViewById(R.id.rcvChuDe);
+        txtXemThem = view.findViewById(R.id.txtXemThem);
 
 
         //C. Code xử lý
 
-        setOnTheLoaiFragment();
+        setOnAlbumList();
+        setOnChuDeList();
 
+        //sự kiện click cho button xem thêm
+        txtXemThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DanhSachAlbumActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
 
-    private void setOnTheLoaiFragment() {
-
+    private void setOnAlbumList() {
         //Album
-        albumAdapter = new AlbumAdapter();
-        //Hiển thị dạng lưới (dạng grid)
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(requireContext(), 2);
-        rcvAlbum.setLayoutManager(gridLayoutManager1);
+        Dataservice dataservice = APIService.getService();
+        Call<List<Album>> callback = dataservice.GetDanhSachAlbum();
+        callback.enqueue(new Callback<List<Album>>() {
+            @Override
+            public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
 
-        //Không cho recycleview cuộn
-        rcvAlbum.setNestedScrollingEnabled(false);
-        rcvAlbum.setFocusable(false);
+                List<Album> MangAlbum = (List<Album>) response.body();
 
-        //truyền dữ liệu vào adapter và gọi adapter cho recycleview
-        albumAdapter.setData(getListAlbum());
-        rcvAlbum.setAdapter(albumAdapter);
+                albumAdapter = new AlbumAdapter(getContext(),MangAlbum);
+                //Hiển thị dạng lưới (dạng grid)
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false);
+                rcvAlbum.setLayoutManager(linearLayoutManager);
 
-        //Thể loại (tương tự album)
-        theLoaiAdapter = new TheLoaiAdapter();
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(requireContext(), 2);
-        rcvTheLoai.setLayoutManager(gridLayoutManager2);
-        rcvTheLoai.setNestedScrollingEnabled(false);
-        rcvTheLoai.setFocusable(false);
+                //Không cho recycleview cuộn
+                rcvAlbum.setNestedScrollingEnabled(false);
+                rcvAlbum.setFocusable(false);
 
-        theLoaiAdapter.setData(getListTheLoai());
-        rcvTheLoai.setAdapter(theLoaiAdapter);
+                //gọi adapter cho recycleview
+                rcvAlbum.setAdapter(albumAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Album>> call, Throwable t) {
+
+            }
+        });
     }
 
-    //Nhập data và trả về list album
-    private List<Album> getListAlbum() {
-        ArrayList<Album> list = new ArrayList<>();
-        list.add(new Album(R.drawable.album_batnhiem, "Bất Nhiễm OST"));
-        list.add(new Album(R.drawable.album_changes, "Changes"));
-        list.add(new Album(R.drawable.album_fearless, "Fearless"));
-        list.add(new Album(R.drawable.album_chiconlaiquakhu, "Chỉ còn lại quá khứ"));
+    private void setOnChuDeList() {
+        //ChuDe
+        Dataservice dataservice = APIService.getService();
+        Call<List<ChuDe>> callbackChuDe = dataservice.GetDanhSachChuDe();
+        callbackChuDe.enqueue(new Callback<List<ChuDe>>() {
+            @Override
+            public void onResponse(Call<List<ChuDe>> call, Response<List<ChuDe>> response) {
 
-        return list;
-    }
-    //Nhập data và trả về list album
-    private List<TheLoai> getListTheLoai() {
-        ArrayList<TheLoai> list = new ArrayList<>();
-        list.add(new TheLoai(R.drawable.the_loai_edm, "EDM"));
-        list.add(new TheLoai(R.drawable.the_loai_hiphop, "Hip Hop"));
-        list.add(new TheLoai(R.drawable.the_loai_indie, "Indie"));
-        list.add(new TheLoai(R.drawable.the_loai_jazz, "Jazz"));
-        list.add(new TheLoai(R.drawable.the_loai_latin, "Latin"));
-        list.add(new TheLoai(R.drawable.the_loai_rock, "Rock"));
-        list.add(new TheLoai(R.drawable.the_loai_rbviet, "R&B Việt"));
+                List<ChuDe> MangChuDe = (List<ChuDe>) response.body();
+                //Thể loại (tương tự album)
+                chuDeAdapter = new ChuDeAdapter();
+                //Đổ dữ liệu vào từng recycleView:
 
-        return list;
+                GridLayoutManager gridLayoutManager2 = new GridLayoutManager(requireContext(), 2);
+                GridLayoutManager gridLayoutManager3 = new GridLayoutManager(requireContext(), 2);
+                GridLayoutManager gridLayoutManager4 = new GridLayoutManager(requireContext(), 2);
+                GridLayoutManager gridLayoutManager5 = new GridLayoutManager(requireContext(), 2);
+
+                //TamTrang
+                rcvChuDeTamTrang.setLayoutManager(gridLayoutManager2);
+                rcvChuDeTamTrang.setNestedScrollingEnabled(false);
+                rcvChuDeTamTrang.setFocusable(false);
+                chuDeAdapter.setData(MangChuDe);
+                rcvChuDeTamTrang.setAdapter(chuDeAdapter);
+
+                //TheLoai
+                rcvTheLoai.setLayoutManager(gridLayoutManager3);
+                rcvTheLoai.setNestedScrollingEnabled(false);
+                rcvTheLoai.setFocusable(false);
+                chuDeAdapter.setData(MangChuDe);
+                rcvTheLoai.setAdapter(chuDeAdapter);
+
+                //ChuDeQuocGia
+                rcvChuDeQuocGia.setLayoutManager(gridLayoutManager4);
+                rcvChuDeQuocGia.setNestedScrollingEnabled(false);
+                rcvChuDeQuocGia.setFocusable(false);
+                chuDeAdapter.setData(MangChuDe);
+                rcvChuDeQuocGia.setAdapter(chuDeAdapter);
+
+                //ChuDe
+                rcvChuDe.setLayoutManager(gridLayoutManager5);
+                rcvChuDe.setNestedScrollingEnabled(false);
+                rcvChuDe.setFocusable(false);
+                chuDeAdapter.setData(MangChuDe);
+                rcvChuDe.setAdapter(chuDeAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ChuDe>> call, Throwable t) {
+
+            }
+        });
     }
+
+
+
+
+
 }

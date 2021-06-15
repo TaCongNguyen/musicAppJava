@@ -1,28 +1,57 @@
 package com.example.genmusic.theLoaiFragment;
 
-public class Album {
 
-    private int imgId;
-    private String TieuDe;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public Album(int imgId, String tieuDe) {
-        this.imgId = imgId;
-        TieuDe = tieuDe;
-    }
+import java.io.Serializable;
 
-    public int getImgId() {
-        return imgId;
-    }
 
-    public void setImgId(int imgId) {
-        this.imgId = imgId;
-    }
+public class Album implements Serializable {
 
-    public String getTieuDe() {
-        return TieuDe;
-    }
+@SerializedName("IdAlbum")
+@Expose
+private String idAlbum;
+@SerializedName("TenAlbum")
+@Expose
+private String tenAlbum;
+@SerializedName("TenCaSiAlbum")
+@Expose
+private String tenCaSiAlbum;
+@SerializedName("HinhAlbum")
+@Expose
+private String hinhAlbum;
 
-    public void setTieuDe(String tieuDe) {
-        TieuDe = tieuDe;
-    }
+public String getIdAlbum() {
+return idAlbum;
+}
+
+public void setIdAlbum(String idAlbum) {
+this.idAlbum = idAlbum;
+}
+
+public String getTenAlbum() {
+return tenAlbum;
+}
+
+public void setTenAlbum(String tenAlbum) {
+this.tenAlbum = tenAlbum;
+}
+
+public String getTenCaSiAlbum() {
+return tenCaSiAlbum;
+}
+
+public void setTenCaSiAlbum(String tenCaSiAlbum) {
+this.tenCaSiAlbum = tenCaSiAlbum;
+}
+
+public String getHinhAlbum() {
+return hinhAlbum;
+}
+
+public void setHinhAlbum(String hinhAlbum) {
+this.hinhAlbum = hinhAlbum;
+}
+
 }

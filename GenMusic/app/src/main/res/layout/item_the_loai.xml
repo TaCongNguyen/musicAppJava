@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="6dp"
     android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp">
+    android:layout_marginBottom="@dimen/_16dp"
+    android:layout_marginHorizontal="10dp"
+    app:cardElevation="0dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="6dp">
+            <ImageView
+                android:id="@+id/imgHinhTheLoai"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/album_batnhiem"
+                android:scaleType="centerCrop"
+                ></ImageView>
+        </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/imgTheLoai"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/the_loai_edm"
-            android:scaleType="centerCrop"></ImageView>
 
         <TextView
-            android:id="@+id/txtTieuDeTheLoai"
+            android:id="@+id/txtTenTheLoai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:text="EDM"
-            android:padding="6dp"
+            android:text="Bất Nhiễm OST"
+            android:padding="2dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:maxWidth="130dp"
             ></TextView>
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
