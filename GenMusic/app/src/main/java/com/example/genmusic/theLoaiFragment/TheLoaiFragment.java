@@ -1,5 +1,6 @@
 package com.example.genmusic.theLoaiFragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,11 +28,12 @@ import retrofit2.Response;
 public class TheLoaiFragment extends Fragment {
 
     //A. Khai báo biến
+    private Context context;
     private View view;
     private TextView txtXemThem;
     private RecyclerView rcvAlbum, rcvChuDeTamTrang, rcvTheLoai, rcvChuDeQuocGia, rcvChuDe;
     private ChuDeAdapter chuDeAdapter;
-    private AlbumAdapter albumAdapter;
+    private AlbumHorizonAdapter albumHorizonAdapter;
 
     @Nullable
     @Override
@@ -39,7 +41,7 @@ public class TheLoaiFragment extends Fragment {
         view = inflater.inflate(R.layout.the_loai_fragment, container, false);
 
         //B. Ánh xạ view
-
+        context = container.getContext();
         rcvAlbum = view.findViewById(R.id.rcvAlbum);
         rcvChuDeTamTrang = view.findViewById(R.id.rcvChuDeTamTrang);
         rcvTheLoai = view.findViewById(R.id.rcvTheLoai);
@@ -75,9 +77,9 @@ public class TheLoaiFragment extends Fragment {
 
                 List<Album> MangAlbum = (List<Album>) response.body();
 
-                albumAdapter = new AlbumAdapter(getContext(),MangAlbum);
+                albumHorizonAdapter = new AlbumHorizonAdapter(context,MangAlbum);
                 //Hiển thị dạng lưới (dạng grid)
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
                 rcvAlbum.setLayoutManager(linearLayoutManager);
 
                 //Không cho recycleview cuộn
@@ -85,7 +87,7 @@ public class TheLoaiFragment extends Fragment {
                 rcvAlbum.setFocusable(false);
 
                 //gọi adapter cho recycleview
-                rcvAlbum.setAdapter(albumAdapter);
+                rcvAlbum.setAdapter(albumHorizonAdapter);
 
             }
 
@@ -109,10 +111,10 @@ public class TheLoaiFragment extends Fragment {
                 chuDeAdapter = new ChuDeAdapter();
                 //Đổ dữ liệu vào từng recycleView:
 
-                GridLayoutManager gridLayoutManager2 = new GridLayoutManager(requireContext(), 2);
-                GridLayoutManager gridLayoutManager3 = new GridLayoutManager(requireContext(), 2);
-                GridLayoutManager gridLayoutManager4 = new GridLayoutManager(requireContext(), 2);
-                GridLayoutManager gridLayoutManager5 = new GridLayoutManager(requireContext(), 2);
+                GridLayoutManager gridLayoutManager2 = new GridLayoutManager(context, 2);
+                GridLayoutManager gridLayoutManager3 = new GridLayoutManager(context, 2);
+                GridLayoutManager gridLayoutManager4 = new GridLayoutManager(context, 2);
+                GridLayoutManager gridLayoutManager5 = new GridLayoutManager(context, 2);
 
                 //TamTrang
                 rcvChuDeTamTrang.setLayoutManager(gridLayoutManager2);

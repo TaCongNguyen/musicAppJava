@@ -17,16 +17,23 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.genmusic.bxhFragment.APIService;
 import com.example.genmusic.bxhFragment.Baihatuathich;
+import com.example.genmusic.bxhFragment.Dataservice;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlayNhacActivity extends AppCompatActivity {
     Toolbar toolbarplaynhac;
@@ -34,10 +41,12 @@ public class PlayNhacActivity extends AppCompatActivity {
     SeekBar sktime;
     ImageButton imgplay,imgrepeat,imgnext,imgpre,imgrandom;
     ViewPager viewPagerplaynhac;
+    ImageView imgYeuThichTrongPlayer;
     public static ArrayList<Baihatuathich> mangbaihat=new ArrayList<>();
     public static ViewPagerPlaylistnhac adapternhac;
     Fragment_Dia_nhac fragment_dia_nhac;
     Fragment_Play_DanhsachbaiHat fragment_play_danhsachbaiHat;
+    private Dataservice dataservice = APIService.getService();
     private static MediaPlayer mediaPlayer = ThreadSafeSingleton.getSingletonInstance();
     int position=0;
     boolean repeat=false;
@@ -174,6 +183,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                         new PlayMp3().execute(mangbaihat.get(position).getLinkbaihat());
                         fragment_dia_nhac.Playnhac(mangbaihat.get(position).getHinhbaihat());
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                        addToFavoriteSong(mangbaihat.get(position));
                         UpdateTime();
                     }
 
@@ -223,6 +233,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                         new PlayMp3().execute(mangbaihat.get(position).getLinkbaihat());
                         fragment_dia_nhac.Playnhac(mangbaihat.get(position).getHinhbaihat());
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                        addToFavoriteSong(mangbaihat.get(position));
                         UpdateTime();
                     }
 
@@ -261,6 +272,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     
 
     private void init() {
+        //ánh xạ
         toolbarplaynhac=findViewById((R.id.toolbarplaynhac));
         txtTimesong=findViewById(R.id.textviewtimesong);
         txtTotaltimesong=findViewById(R.id.textviewtotaltimesong);
@@ -271,26 +283,32 @@ public class PlayNhacActivity extends AppCompatActivity {
         imgrandom=findViewById(R.id.imagebuttonsuffle);
         imgpre=findViewById(R.id.imagebuttonpre);
         viewPagerplaynhac=findViewById(R.id.viewpagerplaynhac);
+        imgYeuThichTrongPlayer = findViewById(R.id.imgYeuThichTrongPlayer);
+
+        //toolbar
         setSupportActionBar(toolbarplaynhac);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarplaynhac.setNavigationOnClickListener((v) ->
         {
             finish();
-
         });
         toolbarplaynhac.setTitleTextColor(Color.WHITE);
+
+        //thêm fragment vào viewpager
         fragment_dia_nhac=new Fragment_Dia_nhac();
         fragment_play_danhsachbaiHat=new Fragment_Play_DanhsachbaiHat();
         adapternhac= new ViewPagerPlaylistnhac((getSupportFragmentManager()));
         adapternhac.AddFragment(fragment_play_danhsachbaiHat);
         adapternhac.AddFragment(fragment_dia_nhac);
-
         viewPagerplaynhac.setAdapter(adapternhac);
+        viewPagerplaynhac.setCurrentItem(1);
+
         fragment_dia_nhac= (Fragment_Dia_nhac) adapternhac.getItem(1);
         if(mangbaihat.size()>0)
         {
             getSupportActionBar().setTitle(mangbaihat.get(0).getTenbaihat());
             new PlayMp3().execute(mangbaihat.get(0).getLinkbaihat());
+            addToFavoriteSong(mangbaihat.get(0));
             imgplay.setImageResource(R.drawable.iconpause);
         }
 
@@ -393,6 +411,7 @@ public class PlayNhacActivity extends AppCompatActivity {
                         new PlayMp3().execute(mangbaihat.get(position).getLinkbaihat());
                         fragment_dia_nhac.Playnhac(mangbaihat.get(position).getHinhbaihat());
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                        addToFavoriteSong(mangbaihat.get(position));
 
                     }
 
@@ -414,6 +433,71 @@ public class PlayNhacActivity extends AppCompatActivity {
                 }
             }
         },1000);
+    }
+
+    //Xử lí sự kiện nút trái tim thêm vào bài hát yêu thích
+    public void addToFavoriteSong(Baihatuathich baihatuathich)
+    {
+
+        //Kiểm tra bài hát đã có trong baihatyeuthich hay chưa
+        Call<String> callbackKiemTra = dataservice.KiemTraBaiHatYeuThich(baihatuathich.getIdbaihat());
+        callbackKiemTra.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+                if(ketqua.equals("1"))
+                {
+                    imgYeuThichTrongPlayer.setImageResource(R.drawable.ic_loved);
+                }
+                if(ketqua.equals("0"))
+                {
+                    imgYeuThichTrongPlayer.setImageResource(R.drawable.ic_love_white);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+        //Sự kiện click nút trái tim thêm vào hoặc xóa khỏi bài hát yêu thích
+        imgYeuThichTrongPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //truyền tendangnhap, idbaihat
+                Call<String> callback = dataservice.InsertOrDeleteBaiHatYeuThich(baihatuathich.getIdbaihat());
+                callback.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String kq = response.body();
+                        if(kq.equals("successful_insert"))
+                        {
+                            Toast.makeText(PlayNhacActivity.this, "Đã thêm " + baihatuathich.getTenbaihat() + " vào Bài hát yêu thích", Toast.LENGTH_SHORT).show();
+                            imgYeuThichTrongPlayer.setImageResource(R.drawable.ic_loved);
+                        }
+                        else if(kq.equals("failed_insert"))
+                        {
+                            Toast.makeText(PlayNhacActivity.this, "Có lỗi khi thêm bài hát", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(kq.equals("successful_delete"))
+                        {
+                            Toast.makeText(PlayNhacActivity.this, "Đã xóa " + baihatuathich.getTenbaihat() + " khỏi Bài hát yêu thích", Toast.LENGTH_SHORT).show();
+                            imgYeuThichTrongPlayer.setImageResource(R.drawable.ic_love_white);
+                        }
+                        else if(kq.equals("failed_delete"))
+                        {
+                            Toast.makeText(PlayNhacActivity.this, "Có lỗi khi xóa bài hát", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 
 }

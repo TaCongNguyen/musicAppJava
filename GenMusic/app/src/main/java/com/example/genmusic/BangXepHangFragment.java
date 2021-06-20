@@ -82,6 +82,8 @@ public class BangXepHangFragment extends Fragment {
                 LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerViewtopbaihatuathich.setLayoutManager(linearLayoutManager);
+                recyclerViewtopbaihatuathich.setFocusable(false);
+                recyclerViewtopbaihatuathich.setNestedScrollingEnabled(false);
                 recyclerViewtopbaihatuathich.setAdapter(baihatuathichAdapter);
             }
 

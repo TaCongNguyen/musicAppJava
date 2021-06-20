@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.genmusic.Model.User;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -22,12 +21,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -37,9 +30,6 @@ public class UserSetting extends AppCompatActivity {
     ImageView Image, Logout;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth auth= FirebaseAuth.getInstance();
-    private FirebaseUser user;
-    private DatabaseReference mDBref;
-    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,27 +58,6 @@ public class UserSetting extends AppCompatActivity {
             }
         });
 
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
-        userID = user.getUid();
-        mDBref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull  DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
-
-                if(userProfile != null) {
-                    Name.setText(userProfile.name);
-                    Email.setText(userProfile.email);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull  DatabaseError error) {
-                Name.setText("Xảy ra lỗi khi lấy dữ liệu từ cơ sở dữ liệu");
-                Email.setText("");
-            }
-        });
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -102,13 +71,11 @@ public class UserSetting extends AppCompatActivity {
                 if(auth.getCurrentUser().getDisplayName()!=null){
                     Name.setText(auth.getCurrentUser().getDisplayName());
                     Email.setText(auth.getCurrentUser().getEmail());
-                    //Glide.with(this).load(String.valueOf(auth.getCurrentUser().getPhotoUrl())).into(Image);
+                    Glide.with(this).load(String.valueOf(auth.getCurrentUser().getPhotoUrl())).into(Image);
                 }
 
             }
         }
-
-
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
@@ -120,7 +87,7 @@ public class UserSetting extends AppCompatActivity {
 
             Name.setText(personName);
             Email.setText(personEmail);
-            //Glide.with(this).load(String.valueOf(personPhoto)).into(Image);
+            Glide.with(this).load(String.valueOf(personPhoto)).into(Image);
 
 
         }

@@ -35,35 +35,16 @@
             android:layout_toEndOf="@id/btnSettingBack"></TextView>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/RLayoutUser2"
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/user_bg"
-        android:padding="@dimen/_8dp">
-
-        <ImageView
-            android:id="@+id/imgSettingUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_8dp"
-            android:background="@null"
-            android:padding="@dimen/_8dp"
-            android:src="@drawable/ic_account"></ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tên User"
-            android:textSize="@dimen/_24dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/imgSettingUser"
-            android:layout_marginStart="@dimen/_8dp"></TextView>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        ads:adSize="LEADERBOARD"
+        android:layout_marginTop="20dp"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
 
     <RelativeLayout
         android:id="@+id/RlayoutPlayer"
