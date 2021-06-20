@@ -1,3 +1,4 @@
+
 package com.example.genmusic.Model;
 
 public class User {

@@ -84,4 +84,6 @@ dependencies {
 
     //AdMob
     implementation 'com.google.android.gms:play-services-ads:20.1.0'
+
+    implementation 'com.google.firebase:firebase-database:20.0.0'
 }

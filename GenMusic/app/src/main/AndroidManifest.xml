@@ -25,13 +25,12 @@
         <activity android:name=".caNhanFragment.AlbumYeuThichActivity" />
         <activity android:name=".theLoaiFragment.DanhSachTheLoaiActivity" />
         <activity android:name=".theLoaiFragment.DanhSachAlbumActivity" />
+        <activity android:name=".trangChuFragment.ResetPassword"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+        
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
