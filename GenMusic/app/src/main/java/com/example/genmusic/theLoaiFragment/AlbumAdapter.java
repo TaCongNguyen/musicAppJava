@@ -28,6 +28,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         this.context = context;
         ListAlbum = listAlbum;
     }
+
+
+
     //Hàm khởi tạo adapter và kết nối với layout xml
     @NonNull
     @Override
@@ -86,6 +89,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             imgHinhAlbum = itemView.findViewById(R.id.imgHinhAlbum);
             txtTenAlbum = itemView.findViewById(R.id.txtTenAlbum);
             txtTenCaSiAlbum = itemView.findViewById(R.id.txtTenCaSiAlbum);
+
+
         }
     }
 }

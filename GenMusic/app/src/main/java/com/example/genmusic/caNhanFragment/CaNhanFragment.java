@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,44 +18,27 @@ import com.example.genmusic.R;
 public class CaNhanFragment extends Fragment {
 
     private Context context;
-    RelativeLayout RLayoutBaiHatYeuThich, RLayoutPlaylistYeuThich, RlayoutBaiHatDaTai, RLayoutAlbumYeuThich;
+    RelativeLayout RLayoutBaiHat;
+    RelativeLayout RLayoutPlaylist;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ca_nhan_fragment, container, false);
 
-        RLayoutBaiHatYeuThich = view.findViewById(R.id.RLayoutBaiHatYeuThich);
-        RlayoutBaiHatDaTai = view.findViewById(R.id.RLayoutBaiHatDaTai);
-        RLayoutAlbumYeuThich = view.findViewById(R.id.RLayoutAlbumYeuThich);
-        RLayoutPlaylistYeuThich = view.findViewById(R.id.RLayoutPlaylistYeuThich);
+        RLayoutBaiHat = view.findViewById(R.id.RLayoutBaiHat);
+        RLayoutPlaylist = view.findViewById(R.id.RLayoutPlaylist);
 
         context = container.getContext();
 
-        RLayoutBaiHatYeuThich.setOnClickListener(new View.OnClickListener() {
+        RLayoutBaiHat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, BaiHatYeuThich.class);
+                Intent intent = new Intent(context, BaiHatDaTai.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
-
-        RLayoutAlbumYeuThich.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, AlbumYeuThichActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        RLayoutPlaylistYeuThich.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TheLoaiYeuThichActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         return view;
     }

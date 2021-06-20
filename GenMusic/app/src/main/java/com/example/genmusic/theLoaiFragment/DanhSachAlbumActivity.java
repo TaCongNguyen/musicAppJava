@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.example.genmusic.R;
 import com.example.genmusic.bxhFragment.APIService;
@@ -42,6 +41,7 @@ public class DanhSachAlbumActivity extends AppCompatActivity {
         //recycleview danh sách album
         setOnAlbumList();
     }
+
     private void setOnAlbumList() {
         //Album
         Dataservice dataservice = APIService.getService();
@@ -60,7 +60,6 @@ public class DanhSachAlbumActivity extends AppCompatActivity {
                 //Không cho recycleview cuộn
                 rcvAllAlbum.setNestedScrollingEnabled(false);
                 rcvAllAlbum.setFocusable(false);
-
 
                 //truyền dữ liệu vào adapter và gọi adapter cho recycleview
                 rcvAllAlbum.setAdapter(albumAdapter);

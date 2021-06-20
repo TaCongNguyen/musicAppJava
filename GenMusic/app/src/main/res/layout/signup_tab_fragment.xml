@@ -40,6 +40,7 @@
 
     <EditText
         android:id="@+id/password"
+        android:inputType="textPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/text_view_bg"
@@ -61,6 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/text_view_bg"
+        android:inputType="textPassword"
         android:hint="Xác nhận mật khẩu"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -75,6 +77,7 @@
         app:layout_constraintHorizontal_bias=".5"/>
 
     <Button
+        android:id="@+id/btnSignup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"

@@ -55,7 +55,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     bxh chart;
     Album album;
     TheLoai theLoai;
-    private ImageView imgThemPlaylistYeuThich;
     private Dataservice dataservice= APIService.getService();
     ArrayList<Baihatuathich> mangbaihat;
 
@@ -78,127 +77,13 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         {
             setValueInView(album.getTenAlbum(), album.getHinhAlbum());
             GetDataAlbum(album.getIdAlbum());
-            addAlbumYeuThich(album);
         }
         if(theLoai != null && !theLoai.getTentheloai().equals(""))
         {
             setValueInView(theLoai.getTentheloai(), theLoai.getHinhtheloai());
             GetDataTheLoai(theLoai.getIdtheloai());
-            addTheLoaiYeuThich(theLoai);
         }
         
-    }
-
-    private void addAlbumYeuThich(Album album) {
-        //Kiểm tra album đã có trong albumyeuthich hay chưa
-        Call<String> callbackKTAlbum = dataservice.KiemTraAlbumYeuThich(album.getIdAlbum());
-        callbackKTAlbum.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                String ketqua = response.body();
-                if(ketqua.equals("1"))
-                {
-                    imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_loved);
-                }
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-
-        //click nút trái tim
-        imgThemPlaylistYeuThich.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //truyền tendangnhap, idalbum
-                Call<String> callbackAlbum = dataservice.InsertOrDeleteAlbumYeuThich(album.getIdAlbum());
-                callbackAlbum.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        String kq = response.body();
-                        if(kq.equals("successful_insert"))
-                        {
-                            Toast.makeText(DanhsachbaihatActivity.this, "Đã thêm " + album.getTenAlbum() + " vào Album yêu thích", Toast.LENGTH_SHORT).show();
-                           imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_loved);
-                        }
-                        else if(kq.equals("failed_insert"))
-                        {
-                            Toast.makeText(DanhsachbaihatActivity.this, "Có lỗi khi thêm Album", Toast.LENGTH_SHORT).show();
-                        }
-                        else if(kq.equals("successful_delete"))
-                        {
-                            Toast.makeText(DanhsachbaihatActivity.this, "Đã xóa " + album.getTenAlbum() + " khỏi Album yêu thích", Toast.LENGTH_SHORT).show();
-                            imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_love_white);
-                        }
-                        else if(kq.equals("failed_delete"))
-                        {
-                            Toast.makeText(DanhsachbaihatActivity.this, "Có lỗi khi xóa Album", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-
-                    }
-                });
-            }
-        });
-
-    }
-    private void addTheLoaiYeuThich(TheLoai theLoai) {
-        //Kiểm tra theloai đã có trong theloaiyeuthich hay chưa
-        Call<String> callbackKTTheLoai = dataservice.KiemTraTheLoaiYeuThich(theLoai.getIdtheloai());
-        callbackKTTheLoai.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                String ketqua = response.body();
-                if(ketqua.equals("1"))
-                {
-                    imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_loved);
-                }
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-
-        //click nút trái tim
-        imgThemPlaylistYeuThich.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //truyền tendangnhap, idalbum
-                Call<String> callbackTheLoai = dataservice.InsertOrDeleteTheLoaiYeuThich(theLoai.getIdtheloai());
-                callbackTheLoai.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        String kq = response.body();
-                        if(kq.equals("successful_insert"))
-                        {
-                            Toast.makeText(DanhsachbaihatActivity.this, "Đã thêm " + theLoai.getTentheloai() + " vào Playlist yêu thích", Toast.LENGTH_SHORT).show();
-                            imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_loved);
-                        }
-                        else if(kq.equals("failed_insert"))
-                        {
-                            Toast.makeText(DanhsachbaihatActivity.this, "Có lỗi khi thêm Playlist", Toast.LENGTH_SHORT).show();
-                        }
-                        else if(kq.equals("successful_delete"))
-                        {
-                            Toast.makeText(DanhsachbaihatActivity.this, "Đã xóa " + theLoai.getTentheloai() + " khỏi Playlist yêu thích", Toast.LENGTH_SHORT).show();
-                            imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_love_white);
-                        }
-                        else if(kq.equals("failed_delete"))
-                        {
-                            Toast.makeText(DanhsachbaihatActivity.this, "Có lỗi khi xóa Playlist", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-
-                    }
-                });
-            }
-        });
     }
 
     private void GetDataTheLoai(String idtheloai) {
@@ -321,7 +206,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         recyclerViewdanhsachbaihat=findViewById(R.id.recyclerviewdanhsachbaihat);
         imgdanhsachcakhuc=findViewById(R.id.imageviewdanhsachcakhuc);
         floatingActionButton=findViewById(R.id.floatingactionbutton);
-        imgThemPlaylistYeuThich = findViewById(R.id.imgThemPlaylistYeuThich);
     }
     private void eventClick(){
         floatingActionButton.setEnabled(true);

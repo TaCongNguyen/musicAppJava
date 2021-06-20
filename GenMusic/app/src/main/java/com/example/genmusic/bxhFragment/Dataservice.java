@@ -44,15 +44,6 @@ public interface Dataservice {
     @GET("DanhSachAlbumMoi.php")
     Call<List<Album>> GetDanhSachAlbumMoi();
 
-    @GET("DanhSachBaiHatYeuThich.php")
-    Call<List<Baihatuathich>> GetDanhSachBaiHatYeuThich();
-
-    @GET("DanhSachAlbumYEUThich.php")
-    Call<List<Album>> GetDanhSachAlbumYEUThich();
-
-    @GET("DanhSachTheLoaiYeuThich.php")
-    Call<List<TheLoai>> GetDanhSachTheLoaiYeuThich();
-
     //----------------------------------POST----------------------------------
     @FormUrlEncoded
     @POST("danhsachbaihat.php")
@@ -72,34 +63,10 @@ public interface Dataservice {
 
     @FormUrlEncoded
     @POST("updateluotthich.php")
-    Call<String> UpdateLuotThich(@Field("idbaihat") String idbaihat);
+    Call<String> UpdateLuotThich(@Field("luotthich") String luotthich, @Field("idbaihat") String idbaihat);
 
     @FormUrlEncoded
     @POST("DanhSachTheLoai.php")
     Call<List<TheLoai>> GetDanhSachTheLoai(@Field("idchude") String idchude);
-
-    @FormUrlEncoded
-    @POST("KiemTraBaiHatYeuThich.php")
-    Call<String> KiemTraBaiHatYeuThich(@Field("idbaihat") String idbaihat);
-
-    @FormUrlEncoded
-    @POST("InsertDeleteBaiHatYeuThich.php")
-    Call<String> InsertOrDeleteBaiHatYeuThich(@Field("idbaihat") String idbaihat);
-
-    @FormUrlEncoded
-    @POST("KiemTraAlbumYeuThich.php")
-    Call<String> KiemTraAlbumYeuThich(@Field("idalbum") String idalbum);
-
-    @FormUrlEncoded
-    @POST("InsertDeleteAlbumYeuThich.php")
-    Call<String> InsertOrDeleteAlbumYeuThich(@Field("idalbum") String idalbum);
-
-    @FormUrlEncoded
-    @POST("KiemTraTheLoaiYeuThich.php")
-    Call<String> KiemTraTheLoaiYeuThich(@Field("idtheloai") String idtheloai);
-
-    @FormUrlEncoded
-    @POST("InsertDeleteTheLoaiYeuThich.php")
-    Call<String> InsertOrDeleteTheLoaiYeuThich(@Field("idtheloai") String idtheloai);
 
 }

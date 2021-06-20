@@ -24,11 +24,9 @@ import com.example.genmusic.bxhFragment.BaihatuathichAdapter;
 import com.example.genmusic.bxhFragment.Dataservice;
 import com.example.genmusic.theLoaiFragment.Album;
 import com.example.genmusic.theLoaiFragment.AlbumAdapter;
-import com.example.genmusic.theLoaiFragment.AlbumHorizonAdapter;
 import com.example.genmusic.theLoaiFragment.DanhSachTheLoaiActivity;
 import com.example.genmusic.theLoaiFragment.TheLoai;
 import com.example.genmusic.theLoaiFragment.TheLoaiAdapter;
-import com.example.genmusic.theLoaiFragment.TheLoaiHorizonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +43,9 @@ public class TrangChuFragment extends Fragment {
     private QuangCaoAdapter quangCaoAdapter;
     private Button btnMoNhac;
     private RecyclerView rcvGoiYTheLoai, rcvBaiHatMoi, rcvAlbumMoi;
-    private TheLoaiHorizonAdapter theLoaiHorizonAdapter;
+    private TheLoaiAdapter theLoaiAdapter;
     private BaihatuathichAdapter baihatuathichAdapter;
-    private AlbumHorizonAdapter albumHorizonAdapter;
+    private AlbumAdapter albumAdapter;
     private Dataservice dataservice = APIService.getService();
     @Nullable
     @Override
@@ -113,13 +111,13 @@ public class TrangChuFragment extends Fragment {
             @Override
             public void onResponse(Call<List<TheLoai>> call, Response<List<TheLoai>> response) {
                 List<TheLoai> mangtheloai = (List<TheLoai>) response.body();
-                theLoaiHorizonAdapter = new TheLoaiHorizonAdapter(getContext(), mangtheloai);
+                theLoaiAdapter = new TheLoaiAdapter(getContext(), mangtheloai);
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false);
                 rcvGoiYTheLoai.setLayoutManager(linearLayoutManager);
                 rcvGoiYTheLoai.setNestedScrollingEnabled(false);
                 rcvGoiYTheLoai.setFocusable(false);
-                rcvGoiYTheLoai.setAdapter(theLoaiHorizonAdapter);
+                rcvGoiYTheLoai.setAdapter(theLoaiAdapter);
             }
 
             @Override
@@ -157,13 +155,13 @@ public class TrangChuFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 List<Album> mangalbummoi = (List<Album>) response.body();
-                albumHorizonAdapter = new AlbumHorizonAdapter(getContext(), mangalbummoi);
+                albumAdapter = new AlbumAdapter(getContext(), mangalbummoi);
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false);
                 rcvAlbumMoi.setLayoutManager(linearLayoutManager);
                 rcvAlbumMoi.setNestedScrollingEnabled(false);
                 rcvAlbumMoi.setFocusable(false);
-                rcvAlbumMoi.setAdapter(albumHorizonAdapter);
+                rcvAlbumMoi.setAdapter(albumAdapter);
             }
 
             @Override
