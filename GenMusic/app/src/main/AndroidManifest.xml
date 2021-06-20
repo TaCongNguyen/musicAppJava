@@ -15,15 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GenMusic">
-<<<<<<< HEAD
+
 
 
         <activity android:name=".caNhanFragment.TheLoaiYeuThichActivity"></activity>
         <activity android:name=".caNhanFragment.AlbumYeuThichActivity" />
         <activity android:name=".theLoaiFragment.DanhSachTheLoaiActivity" />
-=======
-        <activity android:name=".theLoaiFragment.DanhSachTheLoaiActivity"></activity>
->>>>>>> parent of ee58695 (Complete Login with email, register, reset pass)
         <activity android:name=".theLoaiFragment.DanhSachAlbumActivity" />
 
         <meta-data
