@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/relativeLayoutBaiHatUaThich"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -57,12 +59,15 @@
         </TextView>
     </LinearLayout>
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:id="@+id/imageViewluotthich"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:id="@+id/imageViewluotthich"
-        android:src="@drawable/iconlove"
+        android:background="@null"
+        android:src="@drawable/ic_love"
+        android:scaleType="centerCrop"
         android:layout_marginRight="10dp">
     </ImageView>
 </RelativeLayout>

@@ -17,14 +17,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>{
+public class AlbumHorizonAdapter extends RecyclerView.Adapter<AlbumHorizonAdapter.AlbumViewHolder>{
 
     //Tạo context (TheLoaiFragment), để lúc sau có thể intent sang 1 activity khác từ fragment này
     private Context context;
     //Tạo list chứa các thể loại
     private List<Album> ListAlbum;
 
-    public AlbumAdapter(Context context, List<Album> listAlbum) {
+    public AlbumHorizonAdapter(Context context, List<Album> listAlbum) {
         this.context = context;
         ListAlbum = listAlbum;
     }
@@ -33,7 +33,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     @Override
     public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_album, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_album_horizon, parent, false);
 
         return new AlbumViewHolder(view);
     }

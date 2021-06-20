@@ -261,6 +261,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     
 
     private void init() {
+        //ánh xạ
         toolbarplaynhac=findViewById((R.id.toolbarplaynhac));
         txtTimesong=findViewById(R.id.textviewtimesong);
         txtTotaltimesong=findViewById(R.id.textviewtotaltimesong);
@@ -271,21 +272,25 @@ public class PlayNhacActivity extends AppCompatActivity {
         imgrandom=findViewById(R.id.imagebuttonsuffle);
         imgpre=findViewById(R.id.imagebuttonpre);
         viewPagerplaynhac=findViewById(R.id.viewpagerplaynhac);
+
+        //toolbar
         setSupportActionBar(toolbarplaynhac);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarplaynhac.setNavigationOnClickListener((v) ->
         {
             finish();
-
         });
         toolbarplaynhac.setTitleTextColor(Color.WHITE);
+
+        //thêm fragment vào viewpager
         fragment_dia_nhac=new Fragment_Dia_nhac();
         fragment_play_danhsachbaiHat=new Fragment_Play_DanhsachbaiHat();
         adapternhac= new ViewPagerPlaylistnhac((getSupportFragmentManager()));
         adapternhac.AddFragment(fragment_play_danhsachbaiHat);
         adapternhac.AddFragment(fragment_dia_nhac);
-
         viewPagerplaynhac.setAdapter(adapternhac);
+        viewPagerplaynhac.setCurrentItem(1);
+
         fragment_dia_nhac= (Fragment_Dia_nhac) adapternhac.getItem(1);
         if(mangbaihat.size()>0)
         {

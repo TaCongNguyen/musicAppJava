@@ -19,7 +19,7 @@
             app:cardCornerRadius="6dp">
             <ImageView
                 android:id="@+id/imgHinhTheLoai"
-                android:layout_width="130dp"
+                android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:src="@drawable/album_batnhiem"
                 android:scaleType="centerCrop"
