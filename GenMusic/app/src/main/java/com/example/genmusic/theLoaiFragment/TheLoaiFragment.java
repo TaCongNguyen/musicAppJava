@@ -31,7 +31,7 @@ public class TheLoaiFragment extends Fragment {
     private TextView txtXemThem;
     private RecyclerView rcvAlbum, rcvChuDeTamTrang, rcvTheLoai, rcvChuDeQuocGia, rcvChuDe;
     private ChuDeAdapter chuDeAdapter;
-    private AlbumAdapter albumAdapter;
+    private AlbumHorizonAdapter albumHorizonAdapter;
 
     @Nullable
     @Override
@@ -75,7 +75,7 @@ public class TheLoaiFragment extends Fragment {
 
                 List<Album> MangAlbum = (List<Album>) response.body();
 
-                albumAdapter = new AlbumAdapter(getContext(),MangAlbum);
+                albumHorizonAdapter = new AlbumHorizonAdapter(getContext(),MangAlbum);
                 //Hiển thị dạng lưới (dạng grid)
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false);
                 rcvAlbum.setLayoutManager(linearLayoutManager);
@@ -85,7 +85,7 @@ public class TheLoaiFragment extends Fragment {
                 rcvAlbum.setFocusable(false);
 
                 //gọi adapter cho recycleview
-                rcvAlbum.setAdapter(albumAdapter);
+                rcvAlbum.setAdapter(albumHorizonAdapter);
 
             }
 

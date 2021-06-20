@@ -8,7 +8,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 public class ViewPagerPlaylistnhac extends FragmentPagerAdapter {
+
     public  final ArrayList<Fragment> fragmentArrayList=new ArrayList<>();
+
     public ViewPagerPlaylistnhac(@NonNull  FragmentManager fm) {
         super(fm);
     }
