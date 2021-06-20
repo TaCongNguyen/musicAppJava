@@ -15,24 +15,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GenMusic">
-        <activity android:name=".caNhanFragment.TheLoaiYeuThichActivity"></activity>
-        <activity android:name=".caNhanFragment.AlbumYeuThichActivity" />
-        <activity android:name=".theLoaiFragment.DanhSachTheLoaiActivity" />
-
-
+        <activity android:name=".theLoaiFragment.DanhSachTheLoaiActivity"></activity>
+        <activity android:name=".theLoaiFragment.DanhSachAlbumActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".PlayNhacActivity"></activity>
-
+        <activity android:name=".PlayNhacActivity" />
         <activity android:name=".DanhsachbaihatActivity" />
         <activity android:name=".Setting" />
         <activity android:name=".UserSetting" />
@@ -62,7 +58,7 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".caNhanFragment.BaiHatYeuThich" />
+        <activity android:name=".caNhanFragment.BaiHatDaTai" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
