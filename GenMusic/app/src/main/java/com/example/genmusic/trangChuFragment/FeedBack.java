@@ -18,17 +18,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.UUID;
+
 public class FeedBack extends AppCompatActivity {
 
 
     private DatabaseReference mDBref;
-    private int countFeedBack;
+    private UUID idFeedBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_back);
-        Intent intent = getIntent();
-        countFeedBack = intent.getIntExtra("countFeedBack", 0);
+
         openFeedBack();
     }
 
@@ -41,7 +42,7 @@ public class FeedBack extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(FeedBack.this, Setting.class);
-                intent.putExtra("countFeedBack", countFeedBack);
+
                 startActivity(intent);
                 finish();
             }
@@ -50,17 +51,17 @@ public class FeedBack extends AppCompatActivity {
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                countFeedBack ++;
 
+                idFeedBack = UUID.randomUUID();
                 String Feedback = edtFeedBack.getText().toString().trim();
                 mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("FeedBack");
-                mDBref.child("Feedback " + countFeedBack + ": ").setValue(Feedback).addOnCompleteListener(new OnCompleteListener<Void>() {
+                mDBref.child("Feedback " + idFeedBack.toString() + ": ").setValue(Feedback).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
                             Toast.makeText(FeedBack.this, "Cảm ơn vì đã phản hồi <3", Toast.LENGTH_SHORT).show();
                             Intent intent =  new Intent(FeedBack.this, Setting.class);
-                            intent.putExtra("countFeedBack", countFeedBack);
+
                             startActivity(intent);
                             finish();
                         }

@@ -37,14 +37,13 @@ public class Setting extends AppCompatActivity {
     private ImageButton btnSettingBack;
     private ImageView ivFeedBack;
     private AdView mAdView;
-    private int countFeedBack = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         btnSettingBack = findViewById(R.id.btnSettingBack);
-        Intent intent = getIntent();
-        countFeedBack = intent.getIntExtra("countFeedBack", 0);
+
         //Quay về Main Activity
         backToMainActivity();
 
@@ -66,7 +65,7 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Setting.this, FeedBack.class);
-                intent.putExtra("countFeedBack", countFeedBack);
+
                 startActivity(intent);
                 finish();
             }
