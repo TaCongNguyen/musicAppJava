@@ -15,22 +15,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GenMusic">
-
-        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <activity android:name=".trangChuFragment.FeedBack"></activity>
+        <activity android:name=".trangChuFragment.UpdatePassword" /> <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
-        <activity android:name=".caNhanFragment.TheLoaiYeuThichActivity"></activity>
+        <activity android:name=".caNhanFragment.TheLoaiYeuThichActivity" />
         <activity android:name=".caNhanFragment.AlbumYeuThichActivity" />
         <activity android:name=".theLoaiFragment.DanhSachTheLoaiActivity" />
         <activity android:name=".theLoaiFragment.DanhSachAlbumActivity" />
-        <activity android:name=".trangChuFragment.ResetPassword"></activity>
+        <activity android:name=".trangChuFragment.ResetPassword" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

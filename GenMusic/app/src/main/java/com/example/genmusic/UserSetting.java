@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.genmusic.Model.User;
 import com.bumptech.glide.Glide;
+import com.example.genmusic.trangChuFragment.UpdatePassword;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,7 +35,7 @@ import org.w3c.dom.Text;
 public class UserSetting extends AppCompatActivity {
     private ImageButton btnUserBack;
     TextView Name, Email;
-    ImageView Image, Logout;
+    ImageView Image, Logout, UpdatePass;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth auth= FirebaseAuth.getInstance();
     private FirebaseUser user;
@@ -51,6 +52,8 @@ public class UserSetting extends AppCompatActivity {
         Email = findViewById(R.id.userEmail);
         Image = (ImageView) findViewById(R.id.imgUser);
         Logout = findViewById(R.id.imgLogout);
+        UpdatePass = findViewById(R.id.UpdatePass);
+
 
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +61,7 @@ public class UserSetting extends AppCompatActivity {
                 switch (v.getId()) {
                     // ...
                     case R.id.imgLogout:
+
                         auth.signOut();
                         LoginManager.getInstance().logOut();
                         finish();
@@ -65,6 +69,14 @@ public class UserSetting extends AppCompatActivity {
                         break;
                     // ...
                 }
+            }
+        });
+
+        UpdatePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserSetting.this, UpdatePassword.class));
+                finish();
             }
         });
 
@@ -125,7 +137,9 @@ public class UserSetting extends AppCompatActivity {
         //Quay về Main Activity
         backToMainActivity();
 
+
     }
+
 
 
 
