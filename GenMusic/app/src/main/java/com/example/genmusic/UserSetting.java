@@ -80,26 +80,7 @@ public class UserSetting extends AppCompatActivity {
             }
         });
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
-        userID = user.getUid();
-        mDBref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull  DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
 
-                if(userProfile != null) {
-                    Name.setText(userProfile.name);
-                    Email.setText(userProfile.email);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull  DatabaseError error) {
-                Name.setText("Xảy ra lỗi khi lấy dữ liệu từ cơ sở dữ liệu");
-                Email.setText("");
-            }
-        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -126,13 +107,34 @@ public class UserSetting extends AppCompatActivity {
 
             String personEmail = acct.getEmail();
 
-            Uri personPhoto = acct.getPhotoUrl();
+
 
             Name.setText(personName);
             Email.setText(personEmail);
             //Glide.with(this).load(String.valueOf(personPhoto)).into(Image);
 
 
+        } else {
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+            userID = user.getUid();
+            mDBref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                    User userProfile = snapshot.getValue(User.class);
+
+                    if(userProfile != null) {
+                        Name.setText(userProfile.name);
+                        Email.setText(userProfile.email);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull  DatabaseError error) {
+                    Name.setText("Xảy ra lỗi khi lấy dữ liệu từ cơ sở dữ liệu");
+                    Email.setText("");
+                }
+            });
         }
         //Quay về Main Activity
         backToMainActivity();
