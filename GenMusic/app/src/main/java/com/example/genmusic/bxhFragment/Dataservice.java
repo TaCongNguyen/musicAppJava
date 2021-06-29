@@ -44,6 +44,9 @@ public interface Dataservice {
     @GET("DanhSachAlbumMoi.php")
     Call<List<Album>> GetDanhSachAlbumMoi();
 
+    @GET("DanhSachBaiHatYeuThich.php")
+    Call<List<Baihatuathich>> GetDanhSachBaiHatYeuThich();
+
     @GET("DanhSachAlbumYEUThich.php")
     Call<List<Album>> GetDanhSachAlbumYEUThich();
 
@@ -68,7 +71,7 @@ public interface Dataservice {
     Call<List<Baihatuathich>> GetBaiHatQuangCao(@Field("idbaihat") String idbaihat);
 
     @FormUrlEncoded
-    @POST("UpdateLuotNghe.php")
+    @POST("updateluotthich.php")
     Call<String> UpdateLuotThich(@Field("idbaihat") String idbaihat);
 
     @FormUrlEncoded
@@ -77,11 +80,11 @@ public interface Dataservice {
 
     @FormUrlEncoded
     @POST("KiemTraBaiHatYeuThich.php")
-    Call<String> KiemTraBaiHatYeuThich(@Field("tendangnhap") String tendangnhap, @Field("idbaihat") String idbaihat);
+    Call<String> KiemTraBaiHatYeuThich(@Field("idbaihat") String idbaihat);
 
     @FormUrlEncoded
     @POST("InsertDeleteBaiHatYeuThich.php")
-    Call<String> InsertOrDeleteBaiHatYeuThich(@Field("tendangnhap") String tendangnhap, @Field("idbaihat") String idbaihat);
+    Call<String> InsertOrDeleteBaiHatYeuThich(@Field("idbaihat") String idbaihat);
 
     @FormUrlEncoded
     @POST("KiemTraAlbumYeuThich.php")
@@ -98,13 +101,5 @@ public interface Dataservice {
     @FormUrlEncoded
     @POST("InsertDeleteTheLoaiYeuThich.php")
     Call<String> InsertOrDeleteTheLoaiYeuThich(@Field("idtheloai") String idtheloai);
-
-    @FormUrlEncoded
-    @POST("InsertUser.php")
-    Call<String> InsertUser(@Field("tendangnhap") String tendangnhap);
-
-    @FormUrlEncoded
-    @POST("DanhSachBaiHatYeuThich.php")
-    Call<List<Baihatuathich>> GetDanhSachBaiHatYeuThich(@Field("tendangnhap") String tendangnhap);
 
 }

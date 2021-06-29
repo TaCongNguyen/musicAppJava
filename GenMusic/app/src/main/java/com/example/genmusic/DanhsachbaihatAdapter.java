@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.genmusic.bxhFragment.APIService;
 import com.example.genmusic.bxhFragment.Baihatuathich;
 import com.example.genmusic.bxhFragment.Dataservice;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -32,9 +31,6 @@ import retrofit2.Response;
 public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatAdapter.ViewHolder>{
     Context context;
     ArrayList<Baihatuathich> mangbaihat;
-    //lấy tên đăng nhập từ firebase
-    private FirebaseAuth auth= FirebaseAuth.getInstance();
-    private String tendangnhap;
     private Dataservice dataservice = APIService.getService();
 
     public DanhsachbaihatAdapter(Context context, ArrayList<Baihatuathich> mangbaihat) {
@@ -60,8 +56,7 @@ public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatA
         holder.txtindex.setText(position +1+ "");
 
         //Kiểm tra bài hát đã có trong baihatyeuthich hay chưa
-        tendangnhap = auth.getCurrentUser().getEmail();
-        Call<String> callbackKiemTra = dataservice.KiemTraBaiHatYeuThich(tendangnhap, baihatuathich.getIdbaihat());
+        Call<String> callbackKiemTra = dataservice.KiemTraBaiHatYeuThich(baihatuathich.getIdbaihat());
         callbackKiemTra.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -86,6 +81,20 @@ public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatA
                 Intent intent=new Intent(context,PlayNhacActivity.class);
                 intent.putExtra("cakhuc",mangbaihat.get(position));
                 context.startActivity(intent);
+
+                //++luotnghe
+                Call<String> callbackLuotNghe=dataservice.UpdateLuotThich(baihatuathich.getIdbaihat());
+                callbackLuotNghe.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Log.d("hiep","ket qua: " + response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
@@ -94,7 +103,7 @@ public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatA
             @Override
             public void onClick(View v) {
                 //truyền tendangnhap, idbaihat
-                Call<String> callback = dataservice.InsertOrDeleteBaiHatYeuThich(tendangnhap, baihatuathich.getIdbaihat());
+                Call<String> callback = dataservice.InsertOrDeleteBaiHatYeuThich(baihatuathich.getIdbaihat());
                 callback.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {

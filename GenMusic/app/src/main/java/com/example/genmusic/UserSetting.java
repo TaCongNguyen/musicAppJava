@@ -2,27 +2,18 @@ package com.example.genmusic;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.genmusic.Model.User;
 import com.bumptech.glide.Glide;
-import com.example.genmusic.Service.MusicService;
-import com.example.genmusic.bxhFragment.Baihatuathich;
-import com.example.genmusic.caNhanFragment.BaiHatYeuThich;
+import com.example.genmusic.trangChuFragment.UpdatePassword;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -41,49 +32,28 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
-import static com.example.genmusic.MainActivity.isServiceConnected;
-import static com.example.genmusic.MainActivity.musicService;
-
-public class UserSetting extends AppCompatActivity implements MinimizedPlayerFragment.ISendDataListener {
-    private Toolbar toolbarUserSetting;
+public class UserSetting extends AppCompatActivity {
+    private ImageButton btnUserBack;
     TextView Name, Email;
-    ImageView Image;
-    RelativeLayout Logout;
+    ImageView Image, Logout, UpdatePass;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth auth= FirebaseAuth.getInstance();
     private FirebaseUser user;
     private DatabaseReference mDBref;
     private String userID;
 
-    //service
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            MusicService.MusicBinder musicBinder = (MusicService.MusicBinder) service;
-            musicService = musicBinder.getMusicService();
-            isServiceConnected = true;
-
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            musicService = null;
-            isServiceConnected = false;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
 
-        toolbarUserSetting = findViewById(R.id.toolbarUserSetting);
+        btnUserBack = findViewById(R.id.btnUserBack);
         Name = findViewById(R.id.userName);
         Email = findViewById(R.id.userEmail);
         Image = (ImageView) findViewById(R.id.imgUser);
         Logout = findViewById(R.id.imgLogout);
+        UpdatePass = findViewById(R.id.UpdatePass);
 
-        setOnToolbar();
 
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +61,7 @@ public class UserSetting extends AppCompatActivity implements MinimizedPlayerFra
                 switch (v.getId()) {
                     // ...
                     case R.id.imgLogout:
+
                         auth.signOut();
                         LoginManager.getInstance().logOut();
                         finish();
@@ -101,27 +72,15 @@ public class UserSetting extends AppCompatActivity implements MinimizedPlayerFra
             }
         });
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
-        userID = user.getUid();
-        mDBref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        UpdatePass.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull  DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
-
-                if(userProfile != null) {
-                    Name.setText(userProfile.name);
-                    Email.setText(userProfile.email);
-                    //gmail
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull  DatabaseError error) {
-                Name.setText("Xảy ra lỗi khi lấy dữ liệu từ cơ sở dữ liệu");
-                Email.setText("");
+            public void onClick(View v) {
+                startActivity(new Intent(UserSetting.this, UpdatePassword.class));
+                finish();
             }
         });
+
+
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -148,35 +107,42 @@ public class UserSetting extends AppCompatActivity implements MinimizedPlayerFra
 
             String personEmail = acct.getEmail();
 
-            Uri personPhoto = acct.getPhotoUrl();
+
 
             Name.setText(personName);
             Email.setText(personEmail);
             //Glide.with(this).load(String.valueOf(personPhoto)).into(Image);
 
 
+        } else {
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+            userID = user.getUid();
+            mDBref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                    User userProfile = snapshot.getValue(User.class);
+
+                    if(userProfile != null) {
+                        Name.setText(userProfile.name);
+                        Email.setText(userProfile.email);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull  DatabaseError error) {
+                    Name.setText("Xảy ra lỗi khi lấy dữ liệu từ cơ sở dữ liệu");
+                    Email.setText("");
+                }
+            });
         }
         //Quay về Main Activity
-        //backToMainActivity();
+        backToMainActivity();
+
 
     }
 
-    private void setOnToolbar() {
-        setSupportActionBar(toolbarUserSetting);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Tài khoản");
-        toolbarUserSetting.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
 
-    public static String getUser()
-    {
-        return "0";
-    }
 
 
     private void signOut() {
@@ -191,29 +157,17 @@ public class UserSetting extends AppCompatActivity implements MinimizedPlayerFra
                 });
     }
 
-    @Override
-    public void sendNextSongData(Baihatuathich baihat) {
-        Intent intentService = new Intent(UserSetting.this, MusicService.class);
-        //Gửi bài hát sang service
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("baihat", baihat);
-        intentService.putExtras(bundle);
-
-        startService(intentService);
-        bindService(intentService, serviceConnection, Context.BIND_AUTO_CREATE);
+    private void backToMainActivity() {
+        btnUserBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent MainIntent = getIntent();
+                int index = MainIntent.getIntExtra("current_fragment",0);
+                Intent intent = new Intent(UserSetting.this, MainActivity.class);
+                intent.putExtra("current_fragment",index);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
-
-//    private void backToMainActivity() {
-//        btnUserBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent MainIntent = getIntent();
-//                int index = MainIntent.getIntExtra("current_fragment",0);
-//                Intent intent = new Intent(UserSetting.this, MainActivity.class);
-//                intent.putExtra("current_fragment",index);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//    }
 }
