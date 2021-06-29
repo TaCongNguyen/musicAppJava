@@ -32,6 +32,15 @@ public interface Dataservice {
     @GET("DanhSachChuDe.php")
     Call<List<ChuDe>> GetDanhSachChuDe();
 
+    @GET("DanhSachChuDe1.php")
+    Call<List<ChuDe>> GetDanhSachChuDe1();
+
+    @GET("DanhSachChuDe2.php")
+    Call<List<ChuDe>> GetDanhSachChuDe2();
+
+    @GET("DanhSachChuDe3.php")
+    Call<List<ChuDe>> GetDanhSachChuDe3();
+
     @GET("DanhSachQuangCao.php")
     Call<List<QuangCao>> GetDanhSachQuangCao();
 

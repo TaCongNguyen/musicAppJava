@@ -102,6 +102,8 @@ public class BangXepHangFragment extends Fragment {
             public void onResponse(Call<List<bxh>> call, Response<List<bxh>> response) {
                 mangchart=(ArrayList<bxh>) response.body();
                 bxhadapter=new bxhAdapter(getActivity(), android.R.layout.simple_list_item_1,mangchart);
+                lvchart.setFocusable(false);
+                lvchart.setNestedScrollingEnabled(false);
                 lvchart.setAdapter(bxhadapter);
                 setListViewHeightBasedOnChildren(lvchart);
                 lvchart.setOnItemClickListener(new AdapterView.OnItemClickListener() {

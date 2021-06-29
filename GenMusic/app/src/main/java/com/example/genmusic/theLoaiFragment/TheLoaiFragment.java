@@ -100,6 +100,13 @@ public class TheLoaiFragment extends Fragment {
 
     private void setOnChuDeList() {
         //ChuDe
+        setOnChuDe0();
+        setOnChuDe1();
+        setOnChuDe2();
+        setOnChuDe3();
+    }
+    private void setOnChuDe0() {
+        //ChuDe
         Dataservice dataservice = APIService.getService();
         Call<List<ChuDe>> callbackChuDe = dataservice.GetDanhSachChuDe();
         callbackChuDe.enqueue(new Callback<List<ChuDe>>() {
@@ -112,9 +119,6 @@ public class TheLoaiFragment extends Fragment {
                 //Đổ dữ liệu vào từng recycleView:
 
                 GridLayoutManager gridLayoutManager2 = new GridLayoutManager(context, 2);
-                GridLayoutManager gridLayoutManager3 = new GridLayoutManager(context, 2);
-                GridLayoutManager gridLayoutManager4 = new GridLayoutManager(context, 2);
-                GridLayoutManager gridLayoutManager5 = new GridLayoutManager(context, 2);
 
                 //TamTrang
                 rcvChuDeTamTrang.setLayoutManager(gridLayoutManager2);
@@ -122,39 +126,91 @@ public class TheLoaiFragment extends Fragment {
                 rcvChuDeTamTrang.setFocusable(false);
                 chuDeAdapter.setData(MangChuDe);
                 rcvChuDeTamTrang.setAdapter(chuDeAdapter);
+            }
+            @Override
+            public void onFailure(Call<List<ChuDe>> call, Throwable t) {
+            }
+        });
+    }
+    private void setOnChuDe1() {
+        //ChuDe
+        Dataservice dataservice = APIService.getService();
+        Call<List<ChuDe>> callbackChuDe = dataservice.GetDanhSachChuDe1();
+        callbackChuDe.enqueue(new Callback<List<ChuDe>>() {
+            @Override
+            public void onResponse(Call<List<ChuDe>> call, Response<List<ChuDe>> response) {
+
+                List<ChuDe> MangChuDe = (List<ChuDe>) response.body();
+                //Thể loại (tương tự album)
+                chuDeAdapter = new ChuDeAdapter();
+                //Đổ dữ liệu vào từng recycleView:
+
+                GridLayoutManager gridLayoutManager2 = new GridLayoutManager(context, 2);
 
                 //TheLoai
-                rcvTheLoai.setLayoutManager(gridLayoutManager3);
+                rcvTheLoai.setLayoutManager(gridLayoutManager2);
                 rcvTheLoai.setNestedScrollingEnabled(false);
                 rcvTheLoai.setFocusable(false);
                 chuDeAdapter.setData(MangChuDe);
                 rcvTheLoai.setAdapter(chuDeAdapter);
+            }
+            @Override
+            public void onFailure(Call<List<ChuDe>> call, Throwable t) {
+            }
+        });
+    }
+    private void setOnChuDe2() {
+        //ChuDe
+        Dataservice dataservice = APIService.getService();
+        Call<List<ChuDe>> callbackChuDe = dataservice.GetDanhSachChuDe2();
+        callbackChuDe.enqueue(new Callback<List<ChuDe>>() {
+            @Override
+            public void onResponse(Call<List<ChuDe>> call, Response<List<ChuDe>> response) {
+
+                List<ChuDe> MangChuDe = (List<ChuDe>) response.body();
+                //Thể loại (tương tự album)
+                chuDeAdapter = new ChuDeAdapter();
+                //Đổ dữ liệu vào từng recycleView:
+
+                GridLayoutManager gridLayoutManager2 = new GridLayoutManager(context, 2);
 
                 //ChuDeQuocGia
-                rcvChuDeQuocGia.setLayoutManager(gridLayoutManager4);
+                rcvChuDeQuocGia.setLayoutManager(gridLayoutManager2);
                 rcvChuDeQuocGia.setNestedScrollingEnabled(false);
                 rcvChuDeQuocGia.setFocusable(false);
                 chuDeAdapter.setData(MangChuDe);
                 rcvChuDeQuocGia.setAdapter(chuDeAdapter);
+            }
+            @Override
+            public void onFailure(Call<List<ChuDe>> call, Throwable t) {
+            }
+        });
+    }
+    private void setOnChuDe3() {
+        //ChuDe
+        Dataservice dataservice = APIService.getService();
+        Call<List<ChuDe>> callbackChuDe = dataservice.GetDanhSachChuDe3();
+        callbackChuDe.enqueue(new Callback<List<ChuDe>>() {
+            @Override
+            public void onResponse(Call<List<ChuDe>> call, Response<List<ChuDe>> response) {
+
+                List<ChuDe> MangChuDe = (List<ChuDe>) response.body();
+                //Thể loại (tương tự album)
+                chuDeAdapter = new ChuDeAdapter();
+                //Đổ dữ liệu vào từng recycleView:
+
+                GridLayoutManager gridLayoutManager2 = new GridLayoutManager(context, 2);
 
                 //ChuDe
-                rcvChuDe.setLayoutManager(gridLayoutManager5);
+                rcvChuDe.setLayoutManager(gridLayoutManager2);
                 rcvChuDe.setNestedScrollingEnabled(false);
                 rcvChuDe.setFocusable(false);
                 chuDeAdapter.setData(MangChuDe);
                 rcvChuDe.setAdapter(chuDeAdapter);
-
             }
-
             @Override
             public void onFailure(Call<List<ChuDe>> call, Throwable t) {
-
             }
         });
     }
-
-
-
-
-
 }
