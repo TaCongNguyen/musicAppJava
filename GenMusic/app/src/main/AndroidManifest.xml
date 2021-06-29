@@ -42,6 +42,8 @@
         <activity android:name=".PlayNhacActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".DanhsachbaihatActivity" />
+        <activity android:name=".trangChuFragment.FeedBack" />
+        <activity android:name=".trangChuFragment.UpdatePassword" />
         <activity android:name=".Setting" />
         <activity android:name=".UserSetting" />
         <activity android:name=".Search" />

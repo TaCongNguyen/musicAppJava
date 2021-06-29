@@ -17,18 +17,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.UUID;
-
 public class FeedBack extends AppCompatActivity {
 
 
     private DatabaseReference mDBref;
     private UUID idFeedBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_back);
+        Intent intent = getIntent();
 
         openFeedBack();
     }
@@ -51,8 +51,8 @@ public class FeedBack extends AppCompatActivity {
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 idFeedBack = UUID.randomUUID();
+
                 String Feedback = edtFeedBack.getText().toString().trim();
                 mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("FeedBack");
                 mDBref.child("Feedback " + idFeedBack.toString() + ": ").setValue(Feedback).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.genmusic.Service.MusicService;
 import com.example.genmusic.bxhFragment.Baihatuathich;
 import com.example.genmusic.caNhanFragment.BaiHatYeuThich;
+import com.example.genmusic.trangChuFragment.UpdatePassword;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -47,7 +48,7 @@ import static com.example.genmusic.MainActivity.musicService;
 public class UserSetting extends AppCompatActivity implements MinimizedPlayerFragment.ISendDataListener {
     private Toolbar toolbarUserSetting;
     TextView Name, Email;
-    ImageView Image;
+    ImageView Image, UpdatePass;
     RelativeLayout Logout;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth auth= FirebaseAuth.getInstance();
@@ -82,6 +83,7 @@ public class UserSetting extends AppCompatActivity implements MinimizedPlayerFra
         Email = findViewById(R.id.userEmail);
         Image = (ImageView) findViewById(R.id.imgUser);
         Logout = findViewById(R.id.imgLogout);
+        UpdatePass = findViewById(R.id.UpdatePass);
 
         setOnToolbar();
 
@@ -101,27 +103,15 @@ public class UserSetting extends AppCompatActivity implements MinimizedPlayerFra
             }
         });
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
-        userID = user.getUid();
-        mDBref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        UpdatePass.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull  DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
-
-                if(userProfile != null) {
-                    Name.setText(userProfile.name);
-                    Email.setText(userProfile.email);
-                    //gmail
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull  DatabaseError error) {
-                Name.setText("Xảy ra lỗi khi lấy dữ liệu từ cơ sở dữ liệu");
-                Email.setText("");
+            public void onClick(View v) {
+                startActivity(new Intent(UserSetting.this, UpdatePassword.class));
+                finish();
             }
         });
+
+
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -136,7 +126,7 @@ public class UserSetting extends AppCompatActivity implements MinimizedPlayerFra
                 if(auth.getCurrentUser().getDisplayName()!=null){
                     Name.setText(auth.getCurrentUser().getDisplayName());
                     Email.setText(auth.getCurrentUser().getEmail());
-                    //Glide.with(this).load(String.valueOf(auth.getCurrentUser().getPhotoUrl())).into(Image);
+
                 }
 
             }
@@ -148,16 +138,37 @@ public class UserSetting extends AppCompatActivity implements MinimizedPlayerFra
 
             String personEmail = acct.getEmail();
 
-            Uri personPhoto = acct.getPhotoUrl();
+
 
             Name.setText(personName);
             Email.setText(personEmail);
-            //Glide.with(this).load(String.valueOf(personPhoto)).into(Image);
 
 
+
+        }else {
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            mDBref = FirebaseDatabase.getInstance("https://gen-music-c99c9-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+            userID = user.getUid();
+            mDBref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                    User userProfile = snapshot.getValue(User.class);
+
+                    if(userProfile != null) {
+                        Name.setText(userProfile.name);
+                        Email.setText(userProfile.email);
+                        //gmail
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull  DatabaseError error) {
+                    Name.setText("Xảy ra lỗi khi lấy dữ liệu từ cơ sở dữ liệu");
+                    Email.setText("");
+                }
+            });
         }
-        //Quay về Main Activity
-        //backToMainActivity();
+
 
     }
 

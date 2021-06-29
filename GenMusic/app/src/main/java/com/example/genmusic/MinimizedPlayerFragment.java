@@ -82,6 +82,7 @@ public class MinimizedPlayerFragment extends Fragment{
         txtCaSiMinimizedPlayer = view.findViewById(R.id.txtCaSiMinimizedPlayer);
         btnPlayPauseMinimizedPlayer = view.findViewById(R.id.btnPlayPauseMinimizedPlayer);
         btnNextMinimizedPlayer = view.findViewById(R.id.btnNextMinimizedPlayer);
+
         tendangnhap = auth.getCurrentUser().getEmail();
 
         loadLastPlayedSong();
