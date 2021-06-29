@@ -107,4 +107,8 @@ public interface Dataservice {
     @POST("DanhSachBaiHatYeuThich.php")
     Call<List<Baihatuathich>> GetDanhSachBaiHatYeuThich(@Field("tendangnhap") String tendangnhap);
 
+    @FormUrlEncoded
+    @POST("Search.php")
+    Call<List<Baihatuathich>> GetBaiHatSearched(@Field("tukhoa") String tukhoa);
+
 }

@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginHorizontal="@dimen/_64dp"
-            android:hint="Tìm kiếm bài hát, album,..."
+            android:hint="Tìm kiếm bài hát"
             android:layout_centerInParent="true"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="@dimen/_8dp"
