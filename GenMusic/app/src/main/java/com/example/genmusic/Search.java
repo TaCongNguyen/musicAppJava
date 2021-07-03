@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -91,11 +92,6 @@ public class Search extends AppCompatActivity implements MinimizedPlayerFragment
             @Override
             public void onResponse(Call<List<Baihatuathich>> call, Response<List<Baihatuathich>> response) {
                 ArrayList<Baihatuathich> mangbaihatmoi = (ArrayList<Baihatuathich>) response.body();
-                Log.d("search","size = " + mangbaihatmoi.size());
-                if(mangbaihatmoi.size() > 0)
-                {
-                    Log.d("search","ten = " + mangbaihatmoi.get(0).getTenbaihat());
-                }
                 baihatuathichAdapter = new BaihatuathichAdapter(Search.this, mangbaihatmoi);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Search.this, RecyclerView.VERTICAL,false);
                 rcvSearchResult.setLayoutManager(linearLayoutManager);

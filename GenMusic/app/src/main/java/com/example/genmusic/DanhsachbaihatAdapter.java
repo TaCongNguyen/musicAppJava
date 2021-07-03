@@ -60,7 +60,14 @@ public class DanhsachbaihatAdapter extends  RecyclerView.Adapter<DanhsachbaihatA
         holder.txtindex.setText(position +1+ "");
 
         //Kiểm tra bài hát đã có trong baihatyeuthich hay chưa
-        tendangnhap = auth.getCurrentUser().getEmail();
+        try {
+            tendangnhap = auth.getCurrentUser().getEmail();
+        }catch (Exception e)
+        {
+
+        }
+        if(tendangnhap == null)
+            tendangnhap = "adminuser";
         Call<String> callbackKiemTra = dataservice.KiemTraBaiHatYeuThich(tendangnhap, baihatuathich.getIdbaihat());
         callbackKiemTra.enqueue(new Callback<String>() {
             @Override

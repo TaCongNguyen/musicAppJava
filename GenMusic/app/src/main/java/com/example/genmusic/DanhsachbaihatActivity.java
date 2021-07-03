@@ -37,6 +37,7 @@ import com.example.genmusic.theLoaiFragment.Album;
 import com.example.genmusic.theLoaiFragment.TheLoai;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -66,6 +67,9 @@ public class DanhsachbaihatActivity extends AppCompatActivity implements Minimiz
     private ImageView imgThemPlaylistYeuThich;
     private Dataservice dataservice= APIService.getService();
     ArrayList<Baihatuathich> mangbaihat;
+    //lấy tên đăng nhập từ firebase
+    private FirebaseAuth auth= FirebaseAuth.getInstance();
+    private String tendangnhap;
 
     //service
     private ServiceConnection serviceConnection = new ServiceConnection() {
@@ -92,6 +96,14 @@ public class DanhsachbaihatActivity extends AppCompatActivity implements Minimiz
         DataIntent();
         anhxa();
         init();
+        try {
+            tendangnhap = auth.getCurrentUser().getEmail();
+        }catch (Exception e)
+        {
+
+        }
+        if(tendangnhap == null)
+            tendangnhap = "adminuser";
 
         if(chart!=null && !chart.getTen().equals("")){
             setValueInView(chart.getTen(),chart.getHinh());
@@ -114,7 +126,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity implements Minimiz
 
     private void addAlbumYeuThich(Album album) {
         //Kiểm tra album đã có trong albumyeuthich hay chưa
-        Call<String> callbackKTAlbum = dataservice.KiemTraAlbumYeuThich(album.getIdAlbum());
+        Call<String> callbackKTAlbum = dataservice.KiemTraAlbumYeuThich(tendangnhap, album.getIdAlbum());
         callbackKTAlbum.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -122,6 +134,10 @@ public class DanhsachbaihatActivity extends AppCompatActivity implements Minimiz
                 if(ketqua.equals("1"))
                 {
                     imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_loved);
+                }
+                else
+                {
+                    imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_love_white);
                 }
             }
             @Override
@@ -135,7 +151,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity implements Minimiz
             @Override
             public void onClick(View v) {
                 //truyền tendangnhap, idalbum
-                Call<String> callbackAlbum = dataservice.InsertOrDeleteAlbumYeuThich(album.getIdAlbum());
+                Call<String> callbackAlbum = dataservice.InsertOrDeleteAlbumYeuThich(tendangnhap, album.getIdAlbum());
                 callbackAlbum.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -170,7 +186,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity implements Minimiz
     }
     private void addTheLoaiYeuThich(TheLoai theLoai) {
         //Kiểm tra theloai đã có trong theloaiyeuthich hay chưa
-        Call<String> callbackKTTheLoai = dataservice.KiemTraTheLoaiYeuThich(theLoai.getIdtheloai());
+        Call<String> callbackKTTheLoai = dataservice.KiemTraTheLoaiYeuThich(tendangnhap, theLoai.getIdtheloai());
         callbackKTTheLoai.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -178,6 +194,10 @@ public class DanhsachbaihatActivity extends AppCompatActivity implements Minimiz
                 if(ketqua.equals("1"))
                 {
                     imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_loved);
+                }
+                else
+                {
+                    imgThemPlaylistYeuThich.setImageResource(R.drawable.ic_love_white);
                 }
             }
             @Override
@@ -191,7 +211,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity implements Minimiz
             @Override
             public void onClick(View v) {
                 //truyền tendangnhap, idalbum
-                Call<String> callbackTheLoai = dataservice.InsertOrDeleteTheLoaiYeuThich(theLoai.getIdtheloai());
+                Call<String> callbackTheLoai = dataservice.InsertOrDeleteTheLoaiYeuThich(tendangnhap, theLoai.getIdtheloai());
                 callbackTheLoai.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {

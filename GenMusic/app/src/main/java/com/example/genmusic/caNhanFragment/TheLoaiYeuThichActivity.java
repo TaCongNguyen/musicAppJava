@@ -24,6 +24,7 @@ import com.example.genmusic.bxhFragment.BaihatuathichAdapter;
 import com.example.genmusic.bxhFragment.Dataservice;
 import com.example.genmusic.theLoaiFragment.TheLoai;
 import com.example.genmusic.theLoaiFragment.TheLoaiAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,9 @@ public class TheLoaiYeuThichActivity extends AppCompatActivity implements Minimi
     private RecyclerView rcvTheLoaiYeuThich;
     private TheLoaiAdapter theLoaiAdapter;
     private Dataservice dataservice = APIService.getService();
-
+    //lấy tên đăng nhập từ firebase
+    private FirebaseAuth auth= FirebaseAuth.getInstance();
+    private String tendangnhap;
     //service
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -69,6 +72,14 @@ public class TheLoaiYeuThichActivity extends AppCompatActivity implements Minimi
 
         //Cài đặt toolbar
         setToolbar();
+        try {
+            tendangnhap = auth.getCurrentUser().getEmail();
+        }catch (Exception e)
+        {
+
+        }
+        if(tendangnhap == null)
+            tendangnhap = "adminuser";
         //hiển thị danh sách bài hát
         setDataRecycleView();
 
@@ -89,7 +100,7 @@ public class TheLoaiYeuThichActivity extends AppCompatActivity implements Minimi
 
     private void setDataRecycleView() {
 
-        Call<List<TheLoai>> callbackyeuthich = dataservice.GetDanhSachTheLoaiYeuThich();
+        Call<List<TheLoai>> callbackyeuthich = dataservice.GetDanhSachTheLoaiYeuThich(tendangnhap);
         callbackyeuthich.enqueue(new Callback<List<TheLoai>>() {
             @Override
             public void onResponse(Call<List<TheLoai>> call, Response<List<TheLoai>> response) {

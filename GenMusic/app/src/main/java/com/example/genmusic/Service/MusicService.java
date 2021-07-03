@@ -120,10 +120,13 @@ public class MusicService extends Service {
                 .setContentTitle(baihat.getTenbaihat())
                 .setContentText(baihat.getCasi())
                 .setSmallIcon(R.drawable.ic_baseline_music)
-                .setLargeIcon(getBitmapFromURL(baihat.getHinhbaihat()))
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
                         .setShowActionsInCompactView(0, 1, 2)
                         .setMediaSession(mediaSessionCompat.getSessionToken()));
+        if(getBitmapFromURL(baihat.getHinhbaihat()) != null)
+        {
+            builder.setLargeIcon(getBitmapFromURL(baihat.getHinhbaihat()));
+        }
         //if else xử lý 2 trạng thái nút play-pause
         if(mediaPlayer != null && mediaPlayer.isPlaying())
         {

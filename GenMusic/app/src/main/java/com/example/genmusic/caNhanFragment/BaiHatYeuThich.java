@@ -69,7 +69,14 @@ public class BaiHatYeuThich extends AppCompatActivity implements MinimizedPlayer
         rcvBaiHatYeuThich = findViewById(R.id.rcvBaiHatYeuThich);
         toolbarBaiHatYeuThich = findViewById(R.id.toolbarBaiHatYeuThich);
 
-        tendangnhap = auth.getCurrentUser().getEmail();
+        try {
+            tendangnhap = auth.getCurrentUser().getEmail();
+        }catch (Exception e)
+        {
+
+        }
+        if(tendangnhap == null)
+            tendangnhap = "adminuser";
         //Cài đặt toolbar
         setToolbar();
         //hiển thị danh sách bài hát

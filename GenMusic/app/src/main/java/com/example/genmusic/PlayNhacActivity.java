@@ -126,8 +126,14 @@ public class PlayNhacActivity extends AppCompatActivity implements MusicService.
 
         StrictMode.ThreadPolicy policy=new  StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        try {
+            tendangnhap = auth.getCurrentUser().getEmail();
+        }catch (Exception e)
+        {
 
-        tendangnhap = auth.getCurrentUser().getEmail();
+        }
+        if(tendangnhap == null)
+            tendangnhap = "adminuser";
         GetDataFromIntent();
         init();
         eventClick();

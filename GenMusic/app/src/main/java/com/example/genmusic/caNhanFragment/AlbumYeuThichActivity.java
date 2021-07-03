@@ -23,6 +23,7 @@ import com.example.genmusic.bxhFragment.Baihatuathich;
 import com.example.genmusic.bxhFragment.Dataservice;
 import com.example.genmusic.theLoaiFragment.Album;
 import com.example.genmusic.theLoaiFragment.AlbumAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,9 @@ public class AlbumYeuThichActivity extends AppCompatActivity implements Minimize
     private RecyclerView rcvAlbumYeuThich;
     private AlbumAdapter albumAdapter;
     private Dataservice dataservice = APIService.getService();
-
+    //lấy tên đăng nhập từ firebase
+    private FirebaseAuth auth= FirebaseAuth.getInstance();
+    private String tendangnhap;
     //service
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -68,6 +71,14 @@ public class AlbumYeuThichActivity extends AppCompatActivity implements Minimize
 
         //Cài đặt toolbar
         setToolbar();
+        try {
+            tendangnhap = auth.getCurrentUser().getEmail();
+        }catch (Exception e)
+        {
+
+        }
+        if(tendangnhap == null)
+            tendangnhap = "adminuser";
         //hiển thị danh sách bài hát
         setDataRecycleView();
     }
@@ -87,12 +98,11 @@ public class AlbumYeuThichActivity extends AppCompatActivity implements Minimize
 
     private void setDataRecycleView() {
 
-        Call<List<Album>> callbackyeuthich = dataservice.GetDanhSachAlbumYEUThich();
+        Call<List<Album>> callbackyeuthich = dataservice.GetDanhSachAlbumYEUThich(tendangnhap);
         callbackyeuthich.enqueue(new Callback<List<Album>>() {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 List<Album> mangalbum = (List<Album>) response.body();
-                Log.d("hiep", "ten album: " + mangalbum.get(0).getTenAlbum());
                 albumAdapter = new AlbumAdapter(AlbumYeuThichActivity.this, mangalbum);
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(AlbumYeuThichActivity.this, 2);
                 rcvAlbumYeuThich.setLayoutManager(gridLayoutManager);
