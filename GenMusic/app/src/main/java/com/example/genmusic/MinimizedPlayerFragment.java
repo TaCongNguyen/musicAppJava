@@ -85,12 +85,14 @@ public class MinimizedPlayerFragment extends Fragment{
 
         try {
             tendangnhap = auth.getCurrentUser().getEmail();
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
-        if(tendangnhap == null)
+
+        if(tendangnhap == null) {
             tendangnhap = "adminuser";
+        }
+
 
         loadLastPlayedSong();
 
