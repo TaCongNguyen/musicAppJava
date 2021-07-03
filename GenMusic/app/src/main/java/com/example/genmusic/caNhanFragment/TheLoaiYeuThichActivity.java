@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.genmusic.MinimizedPlayerFragment;
 import com.example.genmusic.R;
@@ -41,6 +42,7 @@ public class TheLoaiYeuThichActivity extends AppCompatActivity implements Minimi
     private Toolbar toolbarTheLoaiYeuThich;
     private RecyclerView rcvTheLoaiYeuThich;
     private TheLoaiAdapter theLoaiAdapter;
+    private TextView txtHienThiLoi;
     private Dataservice dataservice = APIService.getService();
     //lấy tên đăng nhập từ firebase
     private FirebaseAuth auth= FirebaseAuth.getInstance();
@@ -69,6 +71,7 @@ public class TheLoaiYeuThichActivity extends AppCompatActivity implements Minimi
 
         rcvTheLoaiYeuThich = findViewById(R.id.rcvTheLoaiYeuThich);
         toolbarTheLoaiYeuThich = findViewById(R.id.toolbarTheLoaiYeuThich);
+        txtHienThiLoi = findViewById(R.id.txtHienThiLoi);
 
         //Cài đặt toolbar
         setToolbar();
@@ -78,11 +81,17 @@ public class TheLoaiYeuThichActivity extends AppCompatActivity implements Minimi
         {
 
         }
-        if(tendangnhap == null)
-            tendangnhap = "adminuser";
-        //hiển thị danh sách bài hát
-        setDataRecycleView();
 
+        if(tendangnhap == null)
+        {
+            //tendangnhap = "adminuser";
+            txtHienThiLoi.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Log.e("hiep","tendangnhap TheLoaiYeuThich: " + tendangnhap);
+            setDataRecycleView();
+        }
     }
 
     private void setToolbar() {

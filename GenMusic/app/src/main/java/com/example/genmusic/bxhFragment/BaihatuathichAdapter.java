@@ -69,7 +69,7 @@ public class BaihatuathichAdapter extends  RecyclerView.Adapter<BaihatuathichAda
         callbackKiemTra.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                String ketqua = response.body();
+                String ketqua = (String) response.body();
                 if(ketqua.equals("1"))
                 {
                     holder.imgluotthich.setImageResource(R.drawable.ic_loved);

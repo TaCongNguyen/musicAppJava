@@ -36,7 +36,17 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="10dp">
         </androidx.recyclerview.widget.RecyclerView>
+
     </androidx.core.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/txtHienThiLoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Có lỗi khi lấy dữ liệu !"
+        android:layout_below="@+id/appbartheloaiyeuthich"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        android:textSize="30sp"></TextView>
     <FrameLayout
         android:id="@+id/framelayoutMain"
         android:layout_width="match_parent"

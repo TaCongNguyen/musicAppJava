@@ -336,14 +336,17 @@ public class PlayNhacActivity extends AppCompatActivity implements MusicService.
                 mangbaihat.clear();
                 Baihatuathich baihatuathich=intent.getParcelableExtra("cakhuc");
                 mangbaihat.add(baihatuathich);
+                position = 0;
             }
-            if(intent.hasExtra("cacbaihat")){
+            if(intent.hasExtra("cacbaihat"))
+            {
                 mangbaihat.clear();
                 ArrayList<Baihatuathich> mangBaiHat=intent.getParcelableArrayListExtra("cacbaihat");
                 mangbaihat=mangBaiHat;
-                }
+                position = 0;
             }
         }
+    }
 
 
     public void UpdateLuotNghe(String idbaihat)
